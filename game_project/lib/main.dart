@@ -1,3 +1,5 @@
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:native_qr/native_qr.dart';
 import 'package:flutter/material.dart';
 
 void main() {
