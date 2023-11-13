@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             // const Text("Hello guys, Are you ready to start!!!"),
             Expanded(
-              flex: 4,
+              flex: 3,
               child: Container(
                   color: Colors.red,
                   child: Row(
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 color: Colors.yellow,
                 child: Row(
