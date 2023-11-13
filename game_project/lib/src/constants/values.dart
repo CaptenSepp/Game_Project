@@ -1,0 +1,1 @@
+double cursorWidth = 1;
