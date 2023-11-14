@@ -1,37 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sepp_note/src/modules/home/screens/home_page.dart';
-import 'package:sepp_note/src/modules/home/screens/note_maker_page.dart';
-import 'package:vrouter/vrouter.dart';
+import 'package:game_project/src/modules/home/pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return VRouter(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Memory Mayhem',
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.black,
-        ),
+        primarySwatch: Colors.orange,
       ),
-      initialUrl: '/home',
-      routes: routes,
+      home: const HomePage(title: 'Memory Mayhem'),
     );
-  }
-
-  List<VRouteElement> get routes {
-    return [
-      VWidget(
-        path: '/home',
-        widget: const HomePage(),
-        stackedRoutes: [
-          VWidget(
-            path: '/note_maker_page',
-            widget: const NoteMakerPage(),
-          ),
-        ],
-      ),
-    ];
   }
 }
