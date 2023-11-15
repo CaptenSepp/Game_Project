@@ -5,8 +5,8 @@ class CustomWidget extends StatelessWidget {
   final String faceName;
   final Color backgroundColor;
 
-  CustomWidget(
-      {this.key, this.faceName = "R", this.backgroundColor = Colors.blue});
+  const CustomWidget(
+      {this.key, this.faceName = "L", this.backgroundColor = Colors.blue});
 
   @override
   Widget build(BuildContext context) {
