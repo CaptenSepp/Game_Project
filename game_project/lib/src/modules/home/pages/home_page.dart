@@ -126,8 +126,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child:
-                        Text("Flipped Cards", style: TextStyle(fontSize: 40.0)),
+                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ",
+                        style: TextStyle(fontSize: 30.0)),
                   ),
                 ),
               ),
@@ -143,7 +143,9 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child: Text("Points", style: TextStyle(fontSize: 40.0)),
+                    child: Text(
+                        "       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
+                        style: TextStyle(fontSize: 40.0)),
                   ),
                 ),
               ),

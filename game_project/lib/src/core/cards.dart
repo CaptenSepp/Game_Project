@@ -18,10 +18,7 @@ class CustomWidget extends StatelessWidget {
         color: backgroundColor,
       ),
       child: Center(
-        child: Text(
-          faceName.substring(0, 1),
-          style: const TextStyle(fontSize: 80.0),
-        ),
+        child: Image.asset("lib/assets/1.png"),
       ),
     );
   }
