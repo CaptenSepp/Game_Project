@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/qr_scan.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
   final String title;
@@ -26,11 +28,7 @@ class _HomePageState extends State<HomePage> {
               child: InkWell(
                 child: Container(
                   color: Colors.red,
-                  child: const Row(
-                    children: [
-                      Text("Camera"),
-                    ],
-                  ),
+                  child: const QRViewExample(),
                 ),
               ),
             ),
@@ -38,8 +36,8 @@ class _HomePageState extends State<HomePage> {
               flex: 3,
               child: Container(
                 color: Colors.blue,
-                child: const Row(
-                  children: [
+                child: Row(
+                  children: const [
                     Text("To pairing cards"),
                   ],
                 ),
@@ -49,8 +47,8 @@ class _HomePageState extends State<HomePage> {
               flex: 1,
               child: Container(
                 color: Colors.green,
-                child: const Row(
-                  children: [
+                child: Row(
+                  children: const [
                     Text("Already flipped cards/ not working QR-codes"),
                   ],
                 ),
@@ -60,8 +58,8 @@ class _HomePageState extends State<HomePage> {
               flex: 3,
               child: Container(
                 color: Colors.yellow,
-                child: const Row(
-                  children: [
+                child: Row(
+                  children: const [
                     Text("players points"),
                   ],
                 ),
