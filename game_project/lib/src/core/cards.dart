@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-class CustomWidget extends StatelessWidget {
+class ImageShowWidget extends StatelessWidget {
   final Key? key;
   final String faceName;
   final Color backgroundColor;
+  final bool showImage;
 
-  const CustomWidget(
-      {this.key, this.faceName = "L", this.backgroundColor = Colors.blue});
+  const ImageShowWidget(
+      {this.key,
+      this.faceName = "L",
+      this.backgroundColor = Colors.blue,
+      this.showImage = true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +22,7 @@ class CustomWidget extends StatelessWidget {
         color: backgroundColor,
       ),
       child: Center(
-        child: Image.asset("lib/assets/1.png"),
-      ),
+          child: showImage ? Image.asset("lib/assets/1.png") : SizedBox()),
     );
   }
 }

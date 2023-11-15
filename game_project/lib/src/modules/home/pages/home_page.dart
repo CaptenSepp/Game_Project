@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   bool _flipXAxis = false;
 
   Widget _buildFront() {
-    return CustomWidget(
+    return ImageShowWidget(
       key: ValueKey<bool>(_showFrontSide),
       faceName: "Front",
       backgroundColor: Colors.blue,
@@ -26,10 +26,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildRear() {
-    return CustomWidget(
+    return ImageShowWidget(
       key: ValueKey<bool>(_showFrontSide),
       faceName: "Rear",
       backgroundColor: Colors.red,
+      showImage: false,
     );
   }
 
