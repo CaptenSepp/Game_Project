@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return ImageShowWidget(
       key: ValueKey<bool>(_showFrontSide),
       faceName: "Front",
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
     );
   }
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     return ImageShowWidget(
       key: ValueKey<bool>(_showFrontSide),
       faceName: "Rear",
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.white,
       showImage: false,
     );
   }
