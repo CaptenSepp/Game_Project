@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _showFrontSide = true;
+  //* the second one should be added to the same functionality
+  bool _showFrontSide2 = true;
   bool _flipXAxis = false;
 
   Widget _buildFront() {
@@ -47,24 +49,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget __transitionBuilder(
-    Widget widget, Animation<double> animation, bool flipXAxis) {
-  final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
-  return AnimatedBuilder(
-    animation: rotateAnim,
-    child: widget,
-    builder: (context, widget) {
-      final angle = flipXAxis ? -rotateAnim.value : rotateAnim.value;
-      return Transform(
-        transform: Matrix4.rotationY(angle),
-        alignment: Alignment.center,
-        child: widget,
-      );
-    },
-  );
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////
+      Widget widget, Animation<double> animation, bool flipXAxis) {
+    final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
+    return AnimatedBuilder(
+      animation: rotateAnim,
+      child: widget,
+      builder: (context, widget) {
+        final angle = flipXAxis ? -rotateAnim.value : rotateAnim.value;
+        return Transform(
+          transform: Matrix4.rotationY(angle),
+          alignment: Alignment.center,
+          child: widget,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,38 +79,72 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 3,
               child: InkWell(
-                child: Container(
-                  color: Colors.red,
-                  child: const QRViewExample(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: Colors.red,
+                    child: const QRViewExample(),
+                  ),
                 ),
               ),
             ),
             Expanded(
               flex: 3,
-              child: Container(
-                constraints: BoxConstraints.tight(Size.square(200.0)),
-                child: _buildFlipAnimation(),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        // constraints: BoxConstraints.tight(Size.square(200.0)),
+                        child: _buildFlipAnimation(),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        // constraints: BoxConstraints.tight(Size.square(200.0)),
+                        child: _buildFlipAnimation(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                color: Colors.green,
-                child: Row(
-                  children: const [
-                    Text("Already flipped cards/ not working QR-codes"),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.blueGrey,
+                  ),
+                  child: const Center(
+                    child:
+                        Text("Flipped Cards", style: TextStyle(fontSize: 40.0)),
+                  ),
                 ),
               ),
             ),
             Expanded(
               flex: 3,
-              child: Container(
-                color: Colors.yellow,
-                child: Row(
-                  children: const [
-                    Text("players points"),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.blueGrey,
+                  ),
+                  child: const Center(
+                    child: Text("Points", style: TextStyle(fontSize: 40.0)),
+                  ),
                 ),
               ),
             ),
