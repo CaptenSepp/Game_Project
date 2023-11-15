@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/cards.dart';
 import '../../../core/qr_scan.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +11,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // void _incrementCounter() {}
+  bool _showFrontSide = true;
+
+  Widget _buildFront() {
+    return CustomWidget(
+      key: ValueKey<bool>(_showFrontSide),
+      faceName: "Front",
+      backgroundColor: Colors.blue,
+    );
+  }
+
+  Widget _buildRear() {
+    return CustomWidget(
+      key: ValueKey<bool>(_showFrontSide),
+      faceName: "Rear",
+      backgroundColor: Colors.red,
+    );
+  }
+
+  Widget _buildFlipAnimation() {
+    return GestureDetector(
+      onTap: () => setState(() => _showFrontSide = !_showFrontSide),
+      child: AnimatedSwitcher(
+        duration: Duration(milliseconds: 600),
+        child: _showFrontSide ? _buildFront() : _buildRear(),
+      ),
+    );
+  }
+
+////////////////////////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +64,9 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 3,
               child: Container(
-                color: Colors.blue,
-                child: Row(
-                  children: const [
-                    Text("To pairing cards"),
-                  ],
-                ),
-              ),
+          constraints: BoxConstraints.tight(Size.square(200.0)),
+          child: _buildFlipAnimation(),
+      ),
             ),
             Expanded(
               flex: 1,
