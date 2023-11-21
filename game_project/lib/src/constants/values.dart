@@ -1,1 +1,3 @@
-double cursorWidth = 1;
+class Values {
+  static const Duration duration = Duration(seconds: 2);
+}

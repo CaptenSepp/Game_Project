@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:game_project/src/constants/values.dart';
 import 'dart:math' as math;
 
 import '../components/image_show_widget.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       frontSide[index] = !frontSide[index];
       _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       if (frontSide[0] && frontSide[1]) {
-        Timer(const Duration(seconds: 5), () {
+        Timer(Values.duration, () {
           flipCartWithIndex(0);
           flipCartWithIndex(1);
         });
