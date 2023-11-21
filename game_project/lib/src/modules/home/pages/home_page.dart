@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import '../../../core/cards.dart';
-import '../../../core/qr_scan.dart';
+import '../components/image_show_widget.dart';
+import '../components/qr_scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
