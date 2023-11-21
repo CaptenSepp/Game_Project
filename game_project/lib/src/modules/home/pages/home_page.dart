@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -34,16 +36,26 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildFlipAnimation(int index) {
     return GestureDetector(
-      onTap: () => setState(() {
-        frontSide[index] = !frontSide[index];
-        _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
-      }),
+      onTap: () => flipCart(index),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 600),
         transitionBuilder: (widget, animation) => __transitionBuilder(widget, animation, _flipXAxis),
         child: frontSide[index] ? _buildFront(index) : _buildRear(index),
       ),
     );
+  }
+
+  void flipCart(int index) {
+    setState(() {
+      frontSide[index] = !frontSide[index];
+      _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
+      if (frontSide[0] && frontSide[1]) {
+        Timer(const Duration(seconds: 5), () {
+          flipCart(0);
+          flipCart(1);
+        });
+      }
+    });
   }
 
   Widget __transitionBuilder(Widget widget, Animation<double> animation, bool flipXAxis) {
