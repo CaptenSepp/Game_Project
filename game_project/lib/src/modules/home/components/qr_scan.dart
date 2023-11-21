@@ -63,8 +63,6 @@ class _QRViewExampleState extends State<QRViewExample> {
         widget.flipCart();
         // _showFrontSide = !_showFrontSide; //****** */
       });
-    }).onData((data) {
-      log(data.toString());
     });
   }
 
