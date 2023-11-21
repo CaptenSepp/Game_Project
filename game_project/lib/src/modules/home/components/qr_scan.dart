@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -5,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
-  const QRViewExample({super.key});
+  final void Function() flipCart;
+
+  const QRViewExample({
+    Key? key,
+    required this.flipCart,
+  }) : super(key: key);
 
   @override
   State<QRViewExample> createState() => _QRViewExampleState();
@@ -37,6 +44,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           child: QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
+            overlay: QrScannerOverlayShape(),
           ),
         ),
         Center(
@@ -52,8 +60,11 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        widget.flipCart();
         // _showFrontSide = !_showFrontSide; //****** */
       });
+    }).onData((data) {
+      log(data.toString());
     });
   }
 
