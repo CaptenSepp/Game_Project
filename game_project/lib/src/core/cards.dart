@@ -6,11 +6,12 @@ class ImageShowWidget extends StatelessWidget {
   final Color backgroundColor;
   final bool showImage;
 
-  const ImageShowWidget(
-      {this.key,
-      this.faceName = "L",
-      this.backgroundColor = Colors.white,
-      this.showImage = true});
+  const ImageShowWidget({
+    this.key,
+    this.faceName = "L",
+    this.backgroundColor = Colors.white,
+    this.showImage = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,7 @@ class ImageShowWidget extends StatelessWidget {
         color: backgroundColor,
       ),
       child: Center(
-        child: showImage
-            ? Image.asset("lib/assets/1.png")
-            : Image.asset("lib/assets/q.jpg"),
+        child: showImage ? Image.asset("assets/1.png") : Image.asset("assets/q.jpg"),
       ),
     );
   }

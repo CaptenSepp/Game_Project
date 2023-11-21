@@ -12,45 +12,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _showFrontSide = true;
-  //* the second one should be added to the same functionality
-  bool _showFrontSide2 = true;
+  List<bool> frontSide = [false, false];
   bool _flipXAxis = false;
 
-  Widget _buildFront() {
+  Widget _buildFront(int index) {
     return ImageShowWidget(
-      key: ValueKey<bool>(_showFrontSide),
+      key: ValueKey<bool>(frontSide[index]),
       faceName: "Front",
       backgroundColor: Colors.white,
     );
   }
 
-  Widget _buildRear() {
+  Widget _buildRear(int index) {
     return ImageShowWidget(
-      key: ValueKey<bool>(_showFrontSide),
+      key: ValueKey<bool>(frontSide[index]),
       faceName: "Rear",
       backgroundColor: Colors.white,
       showImage: false,
     );
   }
 
-  Widget _buildFlipAnimation() {
+  Widget _buildFlipAnimation(int index) {
     return GestureDetector(
       onTap: () => setState(() {
-        _showFrontSide = !_showFrontSide;
+        frontSide[index] = !frontSide[index];
         _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       }),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 600),
-        transitionBuilder: (widget, animation) =>
-            __transitionBuilder(widget, animation, _flipXAxis),
-        child: _showFrontSide ? _buildFront() : _buildRear(),
+        transitionBuilder: (widget, animation) => __transitionBuilder(widget, animation, _flipXAxis),
+        child: frontSide[index] ? _buildFront(index) : _buildRear(index),
       ),
     );
   }
 
-  Widget __transitionBuilder(
-      Widget widget, Animation<double> animation, bool flipXAxis) {
+  Widget __transitionBuilder(Widget widget, Animation<double> animation, bool flipXAxis) {
     final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
       animation: rotateAnim,
@@ -77,15 +73,12 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // const Text("Hello guys, Are you ready to start!!!"),
-            Expanded(
+            const Expanded(
               flex: 3,
               child: InkWell(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    color: Colors.red,
-                    child: const QRViewExample(),
-                  ),
+                  padding: EdgeInsets.all(8.0),
+                  child: QRViewExample(),
                 ),
               ),
             ),
@@ -94,22 +87,20 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         // constraints: BoxConstraints.tight(Size.square(200.0)),
-                        child: _buildFlipAnimation(),
+                        child: _buildFlipAnimation(0),
                       ),
                     ),
                   ),
                   Expanded(
-                    flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         // constraints: BoxConstraints.tight(Size.square(200.0)),
-                        child: _buildFlipAnimation(),
+                        child: _buildFlipAnimation(1),
                       ),
                     ),
                   ),
@@ -127,8 +118,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ",
-                        style: TextStyle(fontSize: 30.0)),
+                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ", style: TextStyle(fontSize: 30.0)),
                   ),
                 ),
               ),
@@ -144,8 +134,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child: Text(
-                        "       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
+                    child: Text("       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
                         style: TextStyle(fontSize: 40.0)),
                   ),
                 ),
