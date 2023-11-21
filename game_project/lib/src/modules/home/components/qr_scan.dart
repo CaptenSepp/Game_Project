@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -22,6 +23,7 @@ class _QRViewExampleState extends State<QRViewExample> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
+  bool canScan = true;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -58,11 +60,18 @@ class _QRViewExampleState extends State<QRViewExample> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        widget.flipCart();
-        // _showFrontSide = !_showFrontSide; //****** */
-      });
+      setState(
+        () {
+          if (canScan) {
+            result = scanData;
+            widget.flipCart();
+            canScan = false;
+            Timer(const Duration(seconds: 2), () {
+              canScan = true;
+            });
+          }
+        },
+      );
     });
   }
 
