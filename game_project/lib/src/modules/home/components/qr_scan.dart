@@ -1,5 +1,8 @@
 import 'dart:async';
+<<<<<<< HEAD
 
+=======
+>>>>>>> c02e07f (code cleaned)
 // import 'dart:developer';
 import 'dart:io';
 
