@@ -20,3 +20,5 @@ final Map<String, String> qrToCard = {
     '19': '09.png',
     '20': '10.png',
   };
+
+  
