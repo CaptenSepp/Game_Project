@@ -1,4 +1,4 @@
-final Map<String, String> qrToCard = {
+final Map<String, String> qrToImage = {
   '1': '01.png',
   '2': '02.png',
   '3': '03.png',

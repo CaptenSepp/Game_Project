@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-// import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
@@ -21,12 +20,12 @@ class QRViewExample extends StatefulWidget {
 
 class _QRViewExampleState extends State<QRViewExample> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  Barcode? result;
+  Barcode? barcodeResult;
   QRViewController? controller;
   bool canScan = true;
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
+  //* In order to get hot reload to work we need to pause the camera if the platform
+  //* is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -50,10 +49,15 @@ class _QRViewExampleState extends State<QRViewExample> {
           ),
         ),
         Center(
-          child: (result != null)
-              ? Text(
-                  'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+          child: (barcodeResult != null)
+              ? Text('Data: ${barcodeResult!.code}')
+              //* Barcode Type: ${describeEnum(result!.format)}
               : const Text('Scan a code'),
+        ),
+        ImageShowWidget(
+          key:
+              UniqueKey(), // Use UniqueKey to force a rebuild when barcodeResult changes
+          barcodeResult: barcodeResult,
         ),
       ],
     );
@@ -65,7 +69,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(
         () {
           if (canScan) {
-            result = scanData;
+            barcodeResult = scanData;
             widget.flipCart();
             canScan = false;
             Timer(const Duration(seconds: 2), () {

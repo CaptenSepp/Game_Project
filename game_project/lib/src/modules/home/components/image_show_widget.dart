@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:game_project/src/constants/map.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ImageShowWidget extends StatelessWidget {
-  final Key? key;
+  final Key key;
   final String faceName;
   final Color backgroundColor;
   final bool showImage;
+  final Barcode? barcodeResult;
 
   const ImageShowWidget({
-    this.key,
+    required this.key,
     this.faceName = "L",
     this.backgroundColor = Colors.white,
     this.showImage = true,
+    required this.barcodeResult, // New parameter
   });
+
+  String getValueForKey(String key, Map<String, String> qrToImage) {
+    return qrToImage[key] ?? ""; // Return empty string if key does not exist
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,8 @@ class ImageShowWidget extends StatelessWidget {
       ),
       child: Center(
         child: showImage
-            ? Image.asset("assets/1.png")
+            ? Image.asset(getValueForKey(barcodeResult?.code ?? "", qrToImage))
+            //* bacodeResult must be imported in this file to use it
             : Image.asset("assets/q.jpg"),
       ),
     );
