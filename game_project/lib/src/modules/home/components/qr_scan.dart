@@ -50,8 +50,10 @@ class _QRViewExampleState extends State<QRViewExample> {
           ),
         ),
         Center(
-          child:
-              (result != null) ? Text('Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}') : const Text('Scan a code'),
+          child: (result != null)
+              ? Text(
+                  'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+              : const Text('Scan a code'),
         ),
       ],
     );

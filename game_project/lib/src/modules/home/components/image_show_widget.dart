@@ -23,7 +23,9 @@ class ImageShowWidget extends StatelessWidget {
         color: backgroundColor,
       ),
       child: Center(
-        child: showImage ? Image.asset("assets/1.png") : Image.asset("assets/q.jpg"),
+        child: showImage
+            ? Image.asset("assets/1.png")
+            : Image.asset("assets/q.jpg"),
       ),
     );
   }
