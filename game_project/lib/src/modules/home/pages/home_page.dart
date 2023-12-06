@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
-import 'package:game_project/src/modules/home/components/image_show_widget.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:math' as math;
 
 import '../components/image_show_widget.dart';
 import '../components/qr_scan.dart';
@@ -27,7 +23,6 @@ class _HomePageState extends State<HomePage> {
       key: ValueKey<bool>(frontSide[index]),
       faceName: "Front",
       backgroundColor: Colors.white,
-      barcodeResult: barcodeResult,
     );
   }
 
@@ -37,7 +32,6 @@ class _HomePageState extends State<HomePage> {
       faceName: "Rear",
       backgroundColor: Colors.white,
       showImage: false,
-      barcodeResult: barcodeResult, //* here must be becoderesult added to the code
     );
   }
 
