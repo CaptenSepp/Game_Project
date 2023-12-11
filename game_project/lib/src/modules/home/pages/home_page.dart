@@ -35,8 +35,6 @@ class _HomePageState extends State<HomePage> {
     return ImageShowWidget(
       // Use a key to track changes in the front side
       key: ValueKey<bool>(frontSide[index]),
-      // faceName: "Front",
-      // backgroundColor: Colors.white,
       barcodeResult: barcodeResult,
     );
   }
@@ -45,8 +43,6 @@ class _HomePageState extends State<HomePage> {
     // create the rear side of a card
     return ImageShowWidget(
       key: ValueKey<bool>(frontSide[index]),
-      // faceName: "Rear",
-      // backgroundColor: Colors.white,
       showImage: false,
       barcodeResult: barcodeResult,
     );

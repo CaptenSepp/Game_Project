@@ -4,15 +4,11 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ImageShowWidget extends StatelessWidget {
   final Key key;
-  // final String faceName;
-  // final Color backgroundColor;
   final bool showImage;
   final Barcode? barcodeResult;
 
   const ImageShowWidget({
     required this.key,
-    // this.faceName = "L",
-    // this.backgroundColor = Colors.white,
     this.showImage = true,
     required this.barcodeResult, // New parameter
   });
@@ -28,7 +24,6 @@ class ImageShowWidget extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(20.0),
-        // color: backgroundColor,
       ),
       child: Center(
         child: showImage
