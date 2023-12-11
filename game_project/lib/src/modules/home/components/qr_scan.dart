@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
-import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
@@ -27,8 +25,7 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   bool canScan = true;
 
-  //* In order to get hot reload to work we need to pause the camera if the platform
-  //* is android, or resume the camera if the platform is iOS.
+  //* In order to get hot reload to work we need to pause the camera if the platform is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -54,7 +51,6 @@ class _QRViewExampleState extends State<QRViewExample> {
         Center(
           child: (barcodeResult != null)
               ? Text('Data: ${barcodeResult!.code}')
-              //* Barcode Type: ${describeEnum(result!.format)}
               : const Text('Scan a code'),
         ),
       ],
@@ -68,7 +64,8 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           if (canScan) {
             if (keyExist(scanData.code ?? '')) {
-              if (barcodeResult != null && (barcodeResult?.code != (scanData.code ?? ''))) {
+              if (barcodeResult != null &&
+                  (barcodeResult?.code != (scanData.code ?? ''))) {
                 barcodeResult = scanData;
                 widget.flipCart();
                 widget.changeBarcodeResult(scanData);

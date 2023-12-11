@@ -2,13 +2,10 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import '../components/image_show_widget.dart';
 import '../components/qr_scan.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,13 +16,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Variables to store barcode result and card flip information
   Barcode? barcodeResult;
   List<bool> frontSide = [false, false];
   bool _flipXAxis = false;
 
   void changeBarcodeResult(Barcode? newBarcode) {
+    // Check if the new barcode result is different from the current one
     if (barcodeResult != newBarcode) {
       setState(() {
+        // Update the barcode result and trigger a state change
         barcodeResult = newBarcode;
       });
     }
@@ -33,31 +33,32 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildFront(int index) {
     return ImageShowWidget(
+      // Use a key to track changes in the front side
       key: ValueKey<bool>(frontSide[index]),
-      faceName: "Front",
-      backgroundColor: Colors.white,
+      // faceName: "Front",
+      // backgroundColor: Colors.white,
       barcodeResult: barcodeResult,
     );
   }
 
   Widget _buildRear(int index) {
+    // create the rear side of a card
     return ImageShowWidget(
       key: ValueKey<bool>(frontSide[index]),
-      faceName: "Rear",
-      backgroundColor: Colors.white,
+      // faceName: "Rear",
+      // backgroundColor: Colors.white,
       showImage: false,
-      barcodeResult: barcodeResult, //* here must be becoderesult added to the code
+      barcodeResult: barcodeResult,
     );
   }
 
   Widget _buildFlipAnimation(int index) {
-    return GestureDetector(
-      onTap: () => flipCartWithIndex(index),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 600),
-        transitionBuilder: (widget, animation) => __transitionBuilder(widget, animation, _flipXAxis),
-        child: frontSide[index] ? _buildFront(index) : _buildRear(index),
-      ),
+    return AnimatedSwitcher(
+      // AnimatedSwitcher for smooth transitions between widget changes
+      duration: const Duration(milliseconds: 600),
+      transitionBuilder: (widget, animation) =>
+          __transitionBuilder(widget, animation, _flipXAxis),
+      child: frontSide[index] ? _buildFront(index) : _buildRear(index),
     );
   }
 
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
       _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       if (frontSide[0] && frontSide[1]) {
         Timer(Values.duration, () {
+          //////////////////////////////////////////////////////////////////////
           flipCartWithIndex(0);
           flipCartWithIndex(1);
         });
@@ -84,7 +86,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget __transitionBuilder(Widget widget, Animation<double> animation, bool flipXAxis) {
+  Widget __transitionBuilder(
+      Widget widget, Animation<double> animation, bool flipXAxis) {
     final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
       animation: rotateAnim,
@@ -156,7 +159,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ", style: TextStyle(fontSize: 30.0)),
+                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ",
+                        style: TextStyle(fontSize: 30.0)),
                   ),
                 ),
               ),
@@ -172,7 +176,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blueGrey,
                   ),
                   child: const Center(
-                    child: Text("       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
+                    child: Text(
+                        "       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
                         style: TextStyle(fontSize: 40.0)),
                   ),
                 ),
