@@ -110,37 +110,50 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              flex: 3,
-              child: InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: QRViewExample(
-                    flipCart: flipCart,
-                    changeBarcodeResult: changeBarcodeResult,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Row(
+              flex: 1,
+              child: Stack(
                 children: [
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: _buildFlipAnimation(0),
+                    flex: 1,
+                    child: InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: QRViewExample(
+                          flipCart: flipCart,
+                          changeBarcodeResult: changeBarcodeResult,
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: _buildFlipAnimation(1),
-                      ),
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        Opacity(
+                          opacity: 0.5,
+                          child: Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                child: _buildFlipAnimation(0),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Opacity(
+                          opacity: 0.5,
+                          child: Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                child: _buildFlipAnimation(1),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
