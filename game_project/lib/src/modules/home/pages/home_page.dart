@@ -131,6 +131,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            ////////////////////////////
             Expanded(
               flex: 1,
               child: Padding(
@@ -172,3 +173,39 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+// Expanded(
+//               flex: 3,
+//               child: InkWell(
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: QRViewExample(
+//                     flipCart: flipCart,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             Expanded(
+//               flex: 3,
+//               child: Row(
+//                 children: [
+//                   Expanded(
+//                     child: Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: Container(
+//                         child: _buildFlipAnimation(0),
+//                       ),
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: Container(
+//                         child: _buildFlipAnimation(1),
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             )
