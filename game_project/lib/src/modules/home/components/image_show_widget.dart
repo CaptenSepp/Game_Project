@@ -26,9 +26,7 @@ class ImageShowWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Center(
-        child: showImage
-            ? Image.asset(getValueForKey(barcodeResult?.code ?? "", qrToImage))
-            : Image.asset("assets/q.jpg"),
+        child: showImage ? Image.asset(getValueForKey(barcodeResult?.code ?? "", qrToImageMap)) : Image.asset("assets/q.jpg"),
       ),
     );
   }

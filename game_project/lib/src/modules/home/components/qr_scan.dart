@@ -25,7 +25,6 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   bool canScan = true;
 
-  //* In order to get hot reload to work we need to pause the camera if the platform is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -70,10 +69,10 @@ class _QRViewExampleState extends State<QRViewExample> {
     });
   }
 
-  void acceptBarcodeAndShowCart(Barcode scanData) {
-    barcodeResult = scanData;
-    widget.flipCart(scanData);
-    widget.changeBarcodeResult(scanData);
+  void acceptBarcodeAndShowCart(Barcode scanBarcodeData) {
+    barcodeResult = scanBarcodeData;
+    widget.flipCart(scanBarcodeData);
+    widget.changeBarcodeResult(scanBarcodeData);
     canScan = false;
     Timer(const Duration(seconds: 2), () {
       canScan = true;
@@ -81,7 +80,7 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   bool keyExist(String key) {
-    return qrToImage.containsKey(key);
+    return qrToImageMap.containsKey(key);
   }
 
   @override

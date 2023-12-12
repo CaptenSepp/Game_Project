@@ -18,21 +18,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Variables to store barcode result and card flip information
-  Barcode? currentResult;
-  Barcode? barcodeResult1;
-  Barcode? barcodeResult2;
 
-  List<bool> frontSide = [false, false];
+  Barcode? currentBarcodeResult; // stores the barcode
+  Barcode? barcodeResult1; // first card
+  Barcode? barcodeResult2; // second card
+
+  List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
   bool _flipXAxis = false;
 
   void changeBarcodeResult(Barcode? newBarcode) {
     // Check if the new barcode result is different from the current one
-    if (currentResult?.code != newBarcode?.code) {
+    if (currentBarcodeResult?.code != newBarcode?.code) {
+      // if you want to change to not be same barcode as before, then check here, means new must be different than current barcode
       setState(() {
         // Update the barcode result and trigger a state change
-        currentResult = newBarcode;
+        currentBarcodeResult = newBarcode;
         if (barcodeResult1 == null) {
           barcodeResult1 = newBarcode;
+          // ignore: prefer_conditional_assignment
         } else if (barcodeResult2 == null) {
           barcodeResult2 = newBarcode;
         }
@@ -42,10 +45,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildPhotoSide(int index) {
     return ImageShowWidget(
-      // Use a key to track changes in the front side
-      key: ValueKey<bool>(frontSide[index]),
-      barcodeResult: (index == 0) ? barcodeResult1 : barcodeResult2,
-    );
+        // Use a key to track changes in the front side
+        key: ValueKey<bool>(frontSide[index]),
+        barcodeResult: (index == 0) ? barcodeResult1 : barcodeResult2);
   }
 
   Widget _buildQuestionSide(int index) {
@@ -57,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFlipAnimation(int index) {
+  Widget _buildFlipAnimationAct(int index) {
     return AnimatedSwitcher(
       // AnimatedSwitcher for smooth transitions between widget changes
       duration: const Duration(milliseconds: 600),
@@ -68,15 +70,15 @@ class _HomePageState extends State<HomePage> {
 
   void flipCardWithIndex(int index) {
     setState(() {
-      frontSide[index] = !frontSide[index];
+      frontSide[index] = !frontSide[index]; // flips any index we give to it, from true to false from false to true
       _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       if (frontSide[0] && frontSide[1]) {
         Timer(Values.showSnackBarDelay, () {
-          if (isPhotosMatches()) {
-            // TODO: show snackbar
+          if (doesPhotosMatch()) {
+            // check if both photos (values) matching
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('You find 1 mach.'),
+                content: Text('You found 1 match!!!'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -84,7 +86,6 @@ class _HomePageState extends State<HomePage> {
         });
 
         Timer(Values.flipBothCardDelay, () {
-          //////////////////////////////////////////////////////////////////////
           flipCardWithIndex(0);
           flipCardWithIndex(1);
           clearAllBarcodes();
@@ -94,18 +95,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   void clearAllBarcodes() {
-    currentResult = null;
+    currentBarcodeResult = null;
     barcodeResult1 = null;
     barcodeResult2 = null;
   }
 
-  bool isPhotosMatches() {
-    return (qrToImage[barcodeResult1?.code] == qrToImage[barcodeResult2?.code]);
+  bool doesPhotosMatch() {
+    return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
 
-  void flipCard(Barcode? barcode) {
+  void whichCardMustFlip(Barcode? barcode) {
     setState(() {
-      if (currentResult?.code == barcode?.code) {
+      if (currentBarcodeResult?.code == barcode?.code) {
+        // we must flip, if new barcode is not the old barcode.
         return;
       }
       if (!frontSide[0]) {
@@ -152,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: QRViewExample(
-                        flipCart: flipCard,
+                        flipCart: whichCardMustFlip,
                         changeBarcodeResult: changeBarcodeResult,
                       ),
                     ),
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                               height: 155,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: _buildFlipAnimation(0),
+                                child: _buildFlipAnimationAct(0),
                               ),
                             ),
                           ),
@@ -184,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                               height: 155,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: _buildFlipAnimation(1),
+                                child: _buildFlipAnimationAct(1),
                               ),
                             ),
                           ),
