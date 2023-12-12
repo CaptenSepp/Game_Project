@@ -106,53 +106,56 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Expanded(
               flex: 8,
               child: Stack(
+                alignment: AlignmentDirectional.bottomCenter,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: QRViewExample(
-                      flipCart: flipCart,
-                      changeBarcodeResult: changeBarcodeResult,
+                  Positioned.fill(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: QRViewExample(
+                        flipCart: flipCart,
+                        changeBarcodeResult: changeBarcodeResult,
+                      ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                  Positioned(
+                    bottom: 10,
+                    // bottom: -20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
                           child: Opacity(
-                            opacity: 0.4,
+                            opacity: 0.6,
                             child: SizedBox(
-                              height: 180,
+                              height: 155,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(30),
                                   child: _buildFlipAnimation(0)),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
                           child: Opacity(
-                            opacity: 0.4,
+                            opacity: 0.6,
                             child: SizedBox(
-                              height: 180,
+                              height: 155,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(30),
                                   child: _buildFlipAnimation(1)),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

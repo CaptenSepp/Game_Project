@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      // home: const HomePage(title: 'Memory Mayhem'),
-      home: const Test(title: 'Memory Mayhem'),
+      home: const HomePage(title: 'Memory Mayhem'),
+      // home: const Test(title: 'Memory Mayhem'),
     );
   }
 }
