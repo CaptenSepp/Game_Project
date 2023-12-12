@@ -2,7 +2,7 @@ final Map<String, String> qrToImage = {
   '1': 'assets/01.png',
   '2': 'assets/02.png',
   '3': 'assets/03.png',
-  '4': 'assets/04.png',
+  '4': 'assets/03.png',
   '5': 'assets/05.png',
   '6': 'assets/06.png',
   '7': 'assets/07.png',

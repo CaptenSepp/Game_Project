@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -17,34 +18,42 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Variables to store barcode result and card flip information
-  Barcode? barcodeResult;
+  Barcode? currentResult;
+  Barcode? barcodeResult1;
+  Barcode? barcodeResult2;
+
   List<bool> frontSide = [false, false];
   bool _flipXAxis = false;
 
   void changeBarcodeResult(Barcode? newBarcode) {
     // Check if the new barcode result is different from the current one
-    if (barcodeResult != newBarcode) {
+    if (currentResult?.code != newBarcode?.code) {
       setState(() {
         // Update the barcode result and trigger a state change
-        barcodeResult = newBarcode;
+        currentResult = newBarcode;
+        if (barcodeResult1 == null) {
+          barcodeResult1 = newBarcode;
+        } else if (barcodeResult2 == null) {
+          barcodeResult2 = newBarcode;
+        }
       });
     }
   }
 
-  Widget _buildFront(int index) {
+  Widget _buildPhotoSide(int index) {
     return ImageShowWidget(
       // Use a key to track changes in the front side
       key: ValueKey<bool>(frontSide[index]),
-      barcodeResult: barcodeResult,
+      barcodeResult: (index == 0) ? barcodeResult1 : barcodeResult2,
     );
   }
 
-  Widget _buildRear(int index) {
+  Widget _buildQuestionSide(int index) {
     // create the rear side of a card
     return ImageShowWidget(
       key: ValueKey<bool>(frontSide[index]),
       showImage: false,
-      barcodeResult: barcodeResult,
+      barcodeResult: barcodeResult1,
     );
   }
 
@@ -52,38 +61,62 @@ class _HomePageState extends State<HomePage> {
     return AnimatedSwitcher(
       // AnimatedSwitcher for smooth transitions between widget changes
       duration: const Duration(milliseconds: 600),
-      transitionBuilder: (widget, animation) =>
-          __transitionBuilder(widget, animation, _flipXAxis),
-      child: frontSide[index] ? _buildFront(index) : _buildRear(index),
+      transitionBuilder: (widget, animation) => __transitionBuilder(widget, animation, _flipXAxis),
+      child: frontSide[index] ? _buildPhotoSide(index) : _buildQuestionSide(index),
     );
   }
 
-  void flipCartWithIndex(int index) {
+  void flipCardWithIndex(int index) {
     setState(() {
       frontSide[index] = !frontSide[index];
       _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       if (frontSide[0] && frontSide[1]) {
-        Timer(Values.duration, () {
+        Timer(Values.showSnackBarDelay, () {
+          if (isPhotosMatches()) {
+            // TODO: show snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('You find 1 mach.'),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+        });
+
+        Timer(Values.flipBothCardDelay, () {
           //////////////////////////////////////////////////////////////////////
-          flipCartWithIndex(0);
-          flipCartWithIndex(1);
+          flipCardWithIndex(0);
+          flipCardWithIndex(1);
+          clearAllBarcodes();
         });
       }
     });
   }
 
-  void flipCart() {
+  void clearAllBarcodes() {
+    currentResult = null;
+    barcodeResult1 = null;
+    barcodeResult2 = null;
+  }
+
+  bool isPhotosMatches() {
+    return (qrToImage[barcodeResult1?.code] == qrToImage[barcodeResult2?.code]);
+  }
+
+  void flipCard(Barcode? barcode) {
     setState(() {
+      if (currentResult?.code == barcode?.code) {
+        return;
+      }
       if (!frontSide[0]) {
-        flipCartWithIndex(0);
+        flipCardWithIndex(0);
       } else if (!frontSide[1]) {
-        flipCartWithIndex(1);
+        flipCardWithIndex(1);
       }
     });
   }
 
-  Widget __transitionBuilder(
-      Widget widget, Animation<double> animation, bool flipXAxis) {
+  Widget __transitionBuilder(Widget widget, Animation<double> animation, bool flipXAxis) {
     final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
       animation: rotateAnim,
@@ -119,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: QRViewExample(
-                        flipCart: flipCart,
+                        flipCart: flipCard,
                         changeBarcodeResult: changeBarcodeResult,
                       ),
                     ),
@@ -137,8 +170,9 @@ class _HomePageState extends State<HomePage> {
                             child: SizedBox(
                               height: 155,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: _buildFlipAnimation(0)),
+                                borderRadius: BorderRadius.circular(30),
+                                child: _buildFlipAnimation(0),
+                              ),
                             ),
                           ),
                         ),
@@ -149,8 +183,9 @@ class _HomePageState extends State<HomePage> {
                             child: SizedBox(
                               height: 155,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: _buildFlipAnimation(1)),
+                                borderRadius: BorderRadius.circular(30),
+                                child: _buildFlipAnimation(1),
+                              ),
                             ),
                           ),
                         ),
@@ -175,10 +210,8 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.blueGrey,
                         ),
                         child: const Center(
-                          child: Text(
-                              "Flipped Cards \n\n1    5     4     7\n\n1    5     4     7\n\n1    5     4     7",
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold)),
+                          child: Text("Flipped Cards \n\n1    5     4     7\n\n1    5     4     7\n\n1    5     4     7",
+                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ),
@@ -194,10 +227,8 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.blueGrey,
                         ),
                         child: const Center(
-                          child: Text(
-                              "    Points\n\nYou --------5\nNick -------5\nVanes -----5",
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold)),
+                          child: Text("    Points\n\nYou --------5\nNick -------5\nVanes -----5",
+                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ),

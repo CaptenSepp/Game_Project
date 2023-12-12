@@ -6,7 +6,7 @@ import 'package:game_project/src/constants/map.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
-  final void Function() flipCart;
+  final void Function(Barcode?) flipCart;
   final void Function(Barcode?) changeBarcodeResult;
 
   const QRViewExample({
@@ -49,9 +49,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           ),
         ),
         Center(
-          child: (barcodeResult != null)
-              ? Text('Data: ${barcodeResult!.code}')
-              : const Text('Scan a code'),
+          child: (barcodeResult != null) ? Text('Data: ${barcodeResult!.code}') : const Text('Scan a code'),
         ),
       ],
     );
@@ -64,28 +62,21 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           if (canScan) {
             if (keyExist(scanData.code ?? '')) {
-              if (barcodeResult != null &&
-                  (barcodeResult?.code != (scanData.code ?? ''))) {
-                barcodeResult = scanData;
-                widget.flipCart();
-                widget.changeBarcodeResult(scanData);
-                canScan = false;
-                Timer(const Duration(seconds: 2), () {
-                  canScan = true;
-                });
-              } else if (barcodeResult == null) {
-                barcodeResult = scanData;
-                widget.flipCart();
-                widget.changeBarcodeResult(scanData);
-                canScan = false;
-                Timer(const Duration(seconds: 2), () {
-                  canScan = true;
-                });
-              }
+              acceptBarcodeAndShowCart(scanData);
             }
           }
         },
       );
+    });
+  }
+
+  void acceptBarcodeAndShowCart(Barcode scanData) {
+    barcodeResult = scanData;
+    widget.flipCart(scanData);
+    widget.changeBarcodeResult(scanData);
+    canScan = false;
+    Timer(const Duration(seconds: 2), () {
+      canScan = true;
     });
   }
 
