@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
+import 'package:game_project/src/modules/home/components/qr_scan.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-
-import '../components/qr_scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -100,6 +99,24 @@ class _HomePageState extends State<HomePage> {
     barcodeResult2 = null;
   }
 
+  void shuffleMapValues(Map<String, String> map) {
+    final List<String> keys = map.keys.toList();
+    final math.Random random = math.Random();
+
+    // Shuffle the keys
+    keys.shuffle(random);
+
+    // Create a new map with shuffled values
+    final Map<String, dynamic> shuffledMap = {};
+    for (int i = 0; i < keys.length; i++) {
+      shuffledMap[keys[i]] = map[keys[i]];
+    }
+
+    // Update the original map with shuffled values
+    map.clear();
+    map.addAll(shuffledMap);
+  }
+
   bool doesPhotosMatch() {
     return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
@@ -137,6 +154,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -152,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Positioned.fill(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(50),
                       child: QRViewExample(
                         flipCart: whichCardMustFlip,
                         changeBarcodeResult: changeBarcodeResult,
@@ -160,8 +178,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Positioned(
+                    // bottom: 0,
                     bottom: 10,
-                    // bottom: -20,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -170,9 +188,9 @@ class _HomePageState extends State<HomePage> {
                           child: Opacity(
                             opacity: 0.6,
                             child: SizedBox(
-                              height: 155,
+                              height: 100,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(40),
                                 child: _buildFlipAnimationAct(0),
                               ),
                             ),
@@ -183,9 +201,9 @@ class _HomePageState extends State<HomePage> {
                           child: Opacity(
                             opacity: 0.6,
                             child: SizedBox(
-                              height: 155,
+                              height: 100,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(40),
                                 child: _buildFlipAnimationAct(1),
                               ),
                             ),
@@ -203,17 +221,40 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blueGrey,
-                        ),
-                        child: const Center(
-                          child: Text("Flipped Cards \n\n1    5     4     7\n\n1    5     4     7\n\n1    5     4     7",
-                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Center(
+                        child: GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 5,
+                            crossAxisSpacing: 1.0,
+                            mainAxisSpacing: 1.0,
+                          ),
+                          itemCount: 20, // TODO itemCount: itemCount, define up in the code
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
+                                    ],
+                                    color: Colors.orangeAccent,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(color: Colors.orange, width: 3.0)),
+                                child: Center(
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: const TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -224,13 +265,32 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
+                          ],
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blueGrey,
+                          color: Colors.orangeAccent,
                         ),
-                        child: const Center(
-                          child: Text("    Points\n\nYou --------5\nNick -------5\nVanes -----5",
-                              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                        child: Center(
+                          child: ListView.builder(
+                            itemCount: 8,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  // border: Border.all(color: Colors.white, width: 2.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${index + 1}' + " Player",
+                                    style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),

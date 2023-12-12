@@ -40,16 +40,16 @@ class _QRViewExampleState extends State<QRViewExample> {
     return Column(
       children: <Widget>[
         Expanded(
-          flex: 5,
+          flex: 5, // TODO must delete
           child: QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
             overlay: QrScannerOverlayShape(),
           ),
         ),
-        Center(
-          child: (barcodeResult != null) ? Text('Data: ${barcodeResult!.code}') : const Text('Scan a code'),
-        ),
+        // Center(
+        //   child: (barcodeResult != null) ? Text('Data: ${barcodeResult!.code}') : const Text('Scan a code'),
+        // ),
       ],
     );
   }
