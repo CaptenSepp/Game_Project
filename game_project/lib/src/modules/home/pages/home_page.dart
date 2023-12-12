@@ -25,6 +25,12 @@ class _HomePageState extends State<HomePage> {
   List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
   bool _flipXAxis = false;
 
+  @override
+  void initState() {
+    shuffleMapValues(qrToImageMap);
+    super.initState();
+  }
+
   void changeBarcodeResult(Barcode? newBarcode) {
     // Check if the new barcode result is different from the current one
     if (currentBarcodeResult?.code != newBarcode?.code) {
@@ -101,15 +107,17 @@ class _HomePageState extends State<HomePage> {
 
   void shuffleMapValues(Map<String, String> map) {
     final List<String> keys = map.keys.toList();
+    final List<String> values = map.values.toList();
     final math.Random random = math.Random();
 
     // Shuffle the keys
     keys.shuffle(random);
+    values.shuffle(random);
 
     // Create a new map with shuffled values
-    final Map<String, dynamic> shuffledMap = {};
+    final Map<String, String> shuffledMap = {};
     for (int i = 0; i < keys.length; i++) {
-      shuffledMap[keys[i]] = map[keys[i]];
+      shuffledMap[keys[i]] = values[i];
     }
 
     // Update the original map with shuffled values
