@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // shuffleMapValues(qrToImageMap);
+    shuffleMapValues(qrToImageMap);
     super.initState();
   }
 
