@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    shuffleMapValues(qrToImageMap);
+    // shuffleMapValues(qrToImageMap);
     super.initState();
   }
 
@@ -135,6 +135,14 @@ class _HomePageState extends State<HomePage> {
       }
     }
   } //!---------------------------------------------------------------------
+
+  Color getBackgroundColorMatches(int index) {
+    if (matches.contains(index.toString())) {
+      return Colors.green;
+    } else {
+      return Colors.orangeAccent;
+    }
+  }
 
   bool doesPhotosMatch() {
     //!---------------------------------------------------------------------
@@ -259,17 +267,21 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.all(3.0),
                               child: Container(
                                 decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
-                                    ],
-                                    color: Colors.orangeAccent,
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(color: Colors.orange, width: 3.0)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
+                                  ],
+                                  color: getBackgroundColorMatches(index + 1),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.orange, width: 3.0),
+                                ),
                                 child: Center(
                                   child: Text(
                                     '${index + 1}',
-                                    style: const TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+                                    style: const TextStyle(
+                                      fontSize: 26.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
