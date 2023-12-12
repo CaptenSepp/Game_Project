@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   Barcode? barcodeResult2; // second card
 
   List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
+  List<String> matches = []; //!---------------------------------------------------------------------
   bool _flipXAxis = false;
 
   @override
@@ -81,6 +82,7 @@ class _HomePageState extends State<HomePage> {
         Timer(Values.showSnackBarDelay, () {
           if (doesPhotosMatch()) {
             // check if both photos (values) matching
+            addToMatches(); //!---------------------------------------------------------------------
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('You found 1 match!!!'),
@@ -122,10 +124,20 @@ class _HomePageState extends State<HomePage> {
 
     // Update the original map with shuffled values
     map.clear();
-    map.addAll(shuffledMap);
+    // map.addAll(shuffledMap);
   }
 
+  void addToMatches() {
+    if (barcodeResult1 != null && barcodeResult2 != null) {
+      if (barcodeResult1?.code != null && barcodeResult2?.code != null) {
+        matches.add(barcodeResult1!.code!);
+        matches.add(barcodeResult2!.code!);
+      }
+    }
+  } //!---------------------------------------------------------------------
+
   bool doesPhotosMatch() {
+    //!---------------------------------------------------------------------
     return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
 
