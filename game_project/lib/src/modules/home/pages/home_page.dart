@@ -114,58 +114,40 @@ class _HomePageState extends State<HomePage> {
               flex: 8,
               child: Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: Colors.blueGrey,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: QRViewExample(
-                        flipCart: flipCart,
-                        changeBarcodeResult: changeBarcodeResult,
-                      ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: QRViewExample(
+                      flipCart: flipCart,
+                      changeBarcodeResult: changeBarcodeResult,
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blueGrey,
-                        ),
-                        child: Opacity(
-                          opacity: 0.5,
-                          child: SizedBox(
-                            height: 180,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                child: _buildFlipAnimation(0),
-                              ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Opacity(
+                            opacity: 0.4,
+                            child: SizedBox(
+                              height: 180,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: _buildFlipAnimation(0)),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.blueGrey,
-                        ),
-                        child: Opacity(
-                          opacity: 0.5,
-                          child: SizedBox(
-                            height: 180,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                child: _buildFlipAnimation(1),
-                              ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Opacity(
+                            opacity: 0.4,
+                            child: SizedBox(
+                              height: 180,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: _buildFlipAnimation(1)),
                             ),
                           ),
                         ),
