@@ -105,33 +105,42 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              flex: 1,
+              flex: 8,
               child: Stack(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: InkWell(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: QRViewExample(
-                          flipCart: flipCart,
-                          changeBarcodeResult: changeBarcodeResult,
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Colors.blueGrey,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: QRViewExample(
+                        flipCart: flipCart,
+                        changeBarcodeResult: changeBarcodeResult,
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Opacity(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.blueGrey,
+                        ),
+                        child: Opacity(
                           opacity: 0.5,
-                          child: Expanded(
+                          child: SizedBox(
+                            height: 180,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -140,9 +149,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Opacity(
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.blueGrey,
+                        ),
+                        child: Opacity(
                           opacity: 0.5,
-                          child: Expanded(
+                          child: SizedBox(
+                            height: 180,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -151,45 +169,55 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  )
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.blueGrey,
-                  ),
-                  child: const Center(
-                    child: Text("Flipped Cards: 1 - 5 - 4 - 7 ",
-                        style: TextStyle(fontSize: 30.0)),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
               flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.blueGrey,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.blueGrey,
+                        ),
+                        child: const Center(
+                          child: Text(
+                              "Flipped Cards \n\n1    5     4     7\n\n1    5     4     7\n\n1    5     4     7",
+                              style: TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
                   ),
-                  child: const Center(
-                    child: Text(
-                        "       Points\nYou ---------------5\nNick --------------5\nVanessa --------5",
-                        style: TextStyle(fontSize: 40.0)),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.blueGrey,
+                        ),
+                        child: const Center(
+                          child: Text(
+                              "    Points\n\nYou --------5\nNick -------5\nVanes -----5",
+                              style: TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ],
