@@ -23,13 +23,43 @@ class _HomePageState extends State<HomePage> {
   Barcode? barcodeResult2; // second card
 
   List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
-  List<String> matches = []; //!---------------------------------------------------------------------
+  List<String> matches = [];
   bool _flipXAxis = false;
 
-  @override
-  void initState() {
-    shuffleMapValues(qrToImageMap);
-    super.initState();
+  // @override
+  // void initState() {
+  //   shuffleMapValues(qrToImageMap);
+  //   super.initState();
+  // }
+  void restartAndShuffle() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Restart the Game"),
+        content: const Text("Are you sure you want to restart the Game?"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                clearAllBarcodes();
+                frontSide = [false, false];
+                matches = [];
+                _flipXAxis = false;
+                shuffleMapValues(qrToImageMap);
+                Navigator.of(context).pop();
+              });
+            },
+            child: const Text("Restart and Shuffle!!!"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("No"),
+          )
+        ],
+      ),
+    );
   }
 
   void changeBarcodeResult(Barcode? newBarcode) {
@@ -82,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         Timer(Values.showSnackBarDelay, () {
           if (doesPhotosMatch()) {
             // check if both photos (values) matching
-            addToMatches(); //!---------------------------------------------------------------------
+            addToMatches();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('You found 1 match!!!'),
@@ -124,7 +154,7 @@ class _HomePageState extends State<HomePage> {
 
     // Update the original map with shuffled values
     map.clear();
-    // map.addAll(shuffledMap);
+    map.addAll(shuffledMap);
   }
 
   void addToMatches() {
@@ -134,7 +164,7 @@ class _HomePageState extends State<HomePage> {
         matches.add(barcodeResult2!.code!);
       }
     }
-  } //!---------------------------------------------------------------------
+  }
 
   Color getBackgroundColorMatches(int index) {
     if (matches.contains(index.toString())) {
@@ -145,7 +175,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool doesPhotosMatch() {
-    //!---------------------------------------------------------------------
     return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
 
@@ -185,6 +214,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
+        leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
