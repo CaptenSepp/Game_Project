@@ -37,6 +37,8 @@ dependencies:
   native_qr: ^0.0.3
   qr_code_scanner: ^1.0.1
   vrouter: ^1.2.1
+  animated_background: ^2.0.0
+  glassmorphism: ^3.0.0
 
 dev_dependencies:
   flutter_test:
