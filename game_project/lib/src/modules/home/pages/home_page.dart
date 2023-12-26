@@ -8,7 +8,7 @@ import 'package:game_project/src/modules/home/components/image_show_widget.dart'
 import 'package:game_project/src/modules/home/components/qr_scan.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:animated_background/animated_background.dart';
-import 'package:flutter/material.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -238,35 +238,43 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
         leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: AnimatedBackground(
-        behaviour: RandomParticleBehaviour(
-          options: const ParticleOptions(
-            spawnMaxRadius: 80,
-            spawnMinRadius: 40,
-            spawnMaxSpeed: 250,
-            spawnMinSpeed: 100,
-            particleCount: 20,
-            maxOpacity: .8,
-            minOpacity: .5,
+      body: Stack(children: [
+        Container(child: Image.asset("assets/bg.png")),
+        AnimatedBackground(
+          behaviour: RandomParticleBehaviour(
+            options: const ParticleOptions(
+              spawnMaxRadius: 80,
+              spawnMinRadius: 40,
+              spawnMaxSpeed: 250,
+              spawnMinSpeed: 100,
+              particleCount: 20,
+              maxOpacity: .8,
+              minOpacity: .5,
 
-            // spawnOpacity: 0.6,
-            // baseColor: Colors.red,
-            image: Image(image: AssetImage('assets/q.png')),
+              // spawnOpacity: 0.6,
+              // baseColor: Colors.red,
+              image: Image(image: AssetImage('assets/q.png')),
+            ),
           ),
-        ),
-        vsync: this as TickerProvider,
-        child: Center(
-          child: bodyCreator(),
-        ),
-      ),
+          vsync: this as TickerProvider,
+          child: Center(
+            child: bodyCreator(),
+          ),
+        )
+      ] ////////////////////////////////////////
+          ),
     );
   }
 
@@ -304,8 +312,33 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: Opacity(
-                          opacity: 0.7,
+                        child: GlassmorphicContainer(
+                          width: 150,
+                          height: 150,
+                          borderRadius: 10,
+                          blur: 5,
+                          alignment: Alignment.bottomCenter,
+                          border: 0,
+                          linearGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
+                              Color(0xFFFFFFFF).withOpacity(0.0),
+                            ],
+                            stops: const [
+                              0.1,
+                              1,
+                            ],
+                          ),
+                          borderGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xFFffffff).withOpacity(0.15),
+                              Color((0xFFFFFFFF)).withOpacity(0.9),
+                            ],
+                          ),
                           child: SizedBox(
                             height: 150,
                             child: ClipRRect(
@@ -333,6 +366,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ],
             ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
           ),
           Expanded(
             flex: 3,

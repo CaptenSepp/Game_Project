@@ -1,3 +1,66 @@
+
+import 'package:flutter/material.dart';
+import 'package:glassmorphism/glassmorphism.dart';
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Modern Advanced Layout with Glassmorphism'),
+      ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // Background image
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+
+            Center(
+              child: GlassmorphicContainer(
+                width: 70,
+                height: 70,
+                borderRadius: 10,
+                blur: 5,
+                alignment: Alignment.bottomCenter,
+                border: 0,
+                linearGradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
+                    Color(0xFFFFFFFF).withOpacity(0.0),
+                  ],
+                  stops: const [
+                    0.1,
+                    1,
+                  ],
+                ),
+                borderGradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFFffffff).withOpacity(0.15),
+                    Color((0xFFFFFFFF)).withOpacity(0.9),
+                  ],
+                ),
+                child: null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 // import 'dart:ui';
 
 // import 'package:flutter/material.dart';
@@ -203,64 +266,3 @@
 //     );
 //   }
 // }
-
-import 'package:flutter/material.dart';
-import 'package:glassmorphism/glassmorphism.dart';
-
-class Test extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Modern Advanced Layout with Glassmorphism'),
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Background image
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/bg.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-
-            Center(
-              child: GlassmorphicContainer(
-                width: 70,
-                height: 70,
-                borderRadius: 10,
-                blur: 5,
-                alignment: Alignment.bottomCenter,
-                border: 0,
-                linearGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
-                    Color(0xFFFFFFFF).withOpacity(0.0),
-                  ],
-                  stops: const [
-                    0.1,
-                    1,
-                  ],
-                ),
-                borderGradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFFffffff).withOpacity(0.15),
-                    Color((0xFFFFFFFF)).withOpacity(0.9),
-                  ],
-                ),
-                child: null,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
