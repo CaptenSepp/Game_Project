@@ -45,6 +45,7 @@ class _QRViewExampleState extends State<QRViewExample> {
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
             overlay: QrScannerOverlayShape(),
+            overlayMargin: EdgeInsetsGeometry.infinity,
           ),
         ),
         // Center(
