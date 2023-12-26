@@ -241,40 +241,49 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // extendBodyBehindAppBar: true,
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text(widget.title),
-        leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Stack(children: [
-        Container(child: Image.asset("assets/bg.png")),
-        AnimatedBackground(
-          behaviour: RandomParticleBehaviour(
-            options: const ParticleOptions(
-              spawnMaxRadius: 80,
-              spawnMinRadius: 40,
-              spawnMaxSpeed: 250,
-              spawnMinSpeed: 100,
-              particleCount: 20,
-              maxOpacity: .8,
-              minOpacity: .5,
-
-              // spawnOpacity: 0.6,
-              // baseColor: Colors.red,
-              image: Image(image: AssetImage('assets/q.png')),
+    return Stack(
+      children: [
+        Expanded(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/bg1.jpg"), fit: BoxFit.cover),
             ),
           ),
-          vsync: this as TickerProvider,
-          child: Center(
-            child: bodyCreator(),
+        ),
+        Scaffold(
+          // extendBodyBehindAppBar: true,
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text(widget.title),
+            leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
-        )
-      ] ////////////////////////////////////////
+          body: AnimatedBackground(
+            behaviour: RandomParticleBehaviour(
+              options: const ParticleOptions(
+                spawnMaxRadius: 80,
+                spawnMinRadius: 40,
+                spawnMaxSpeed: 250,
+                spawnMinSpeed: 100,
+                particleCount: 20,
+                maxOpacity: .8,
+                minOpacity: .5,
+
+                // spawnOpacity: 0.6,
+                // baseColor: Colors.red,
+                image: Image(image: AssetImage('assets/q.png')),
+              ),
+            ),
+            vsync: this as TickerProvider,
+            child: Center(
+              child: bodyCreator(),
+            ),
           ),
+        ),
+      ],
     );
   }
 
@@ -367,10 +376,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Container(),
-          ),
+          // Expanded(
+          //   flex: 1,
+          //   child: Container(),
+          // ),
           Expanded(
             flex: 3,
             child: Row(
