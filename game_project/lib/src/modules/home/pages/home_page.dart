@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:game_project/src/modules/home/components/qr_scan.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:animated_background/animated_background.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void columnCountCalculator() {
     // here get checked how many cards are remaining unflipped
     if (toShowCards.length <= 20 && toShowCards.length > 12) {
-      columnCount = 5;
+      columnCount = 5; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------------
     } else if (toShowCards.length <= 12 && toShowCards.length > 6) {
       columnCount = 4;
     } else if (toShowCards.length <= 6 && toShowCards.length > 2) {
@@ -243,24 +243,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        //?----------------------- background Image -----------------------------
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/bg1.jpg"), fit: BoxFit.cover),
+              image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
             ),
           ),
         ),
         Scaffold(
-          // extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: true,
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text(widget.title),
-            leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
-            backgroundColor: Colors.transparent,
+            centerTitle: true,
             elevation: 0,
-          ),
+            backgroundColor: Colors.transparent,
+            title: Text(
+              widget.title,
+              style: const TextStyle(color: Colors.white),
+            ),
+            leading: IconButton(
+                onPressed: restartAndShuffle,
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                  color: Colors.white,
+                )),
+          ), //?----------------------- Animated background  -----------------------------
           body: AnimatedBackground(
             behaviour: RandomParticleBehaviour(
               options: const ParticleOptions(
@@ -268,7 +278,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 spawnMinRadius: 40,
                 spawnMaxSpeed: 250,
                 spawnMinSpeed: 100,
-                particleCount: 20,
+                particleCount: 5,
                 maxOpacity: .8,
                 minOpacity: .5,
 
@@ -287,24 +297,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+  //?----------------------- Scaffolds body -----------------------------
   Padding bodyCreator() {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Expanded(
-            flex: 8,
+            flex: 13,
             child: Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: [
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Opacity(
-                        opacity: 0.9,
+                //?----------------------- QR Scanner camera -----------------------------
+                Opacity(
+                  opacity: 0.9,
+                  // todo i need a very small shadow under this screen
+                  child: Positioned.fill(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(75),
                         child: QRViewExample(
                           flipCart: whichCardMustFlip,
                           changeBarcodeResult: changeBarcodeResult,
@@ -313,19 +326,81 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
+                //?----------------------- Leader-board  -----------------------------
+                Positioned(
+                  top: 50,
+                  left: -25, //* -30 left side out of the screen
+                  child: GlassmorphicContainer(
+                    width: 120,
+                    height: 170,
+                    borderRadius: 20,
+                    blur: 2,
+                    alignment: Alignment.topCenter,
+                    border: 0.5,
+                    linearGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 10, 10, 10).withOpacity(0.4),
+                        Color(0xFFFFFFFF).withOpacity(0.0),
+                      ],
+                      stops: const [
+                        0.1,
+                        1,
+                      ],
+                    ),
+                    borderGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFFffffff).withOpacity(0.15),
+                        Color((0xFFFFFFFF)).withOpacity(0.9),
+                      ],
+                    ),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            // border: Border.all(color: Colors.white, width: 2.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 0, 15, 0), //* 30 right side text
+                                // todo, the name text must have a limit and stop where it doesnt fit anymore
+                                child: Text(
+                                  '${index + 1}' ". Pla...",
+                                  style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 Positioned(
                   // bottom: 0,
                   bottom: 20,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+
+                    //?----------------------- Flipping Cards -----------------------------
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: GlassmorphicContainer(
+                          // todo most these Widgets have variables which dont let the Class to be auto-extracted, what to do?
                           width: 150,
                           height: 150,
-                          borderRadius: 10,
-                          blur: 5,
+                          borderRadius: 30,
+                          blur: 2,
                           alignment: Alignment.bottomCenter,
                           border: 0,
                           linearGradient: LinearGradient(
@@ -358,9 +433,35 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Opacity(
-                          opacity: 0.7,
+                        padding: const EdgeInsets.all(10.0),
+                        child: GlassmorphicContainer(
+                          // todo most these Widgets have variables which dont let the Class to be auto-extracted, what to do?
+                          width: 150,
+                          height: 150,
+                          borderRadius: 30,
+                          blur: 2,
+                          alignment: Alignment.bottomCenter,
+                          border: 0,
+                          linearGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
+                              Color(0xFFFFFFFF).withOpacity(0.0),
+                            ],
+                            stops: const [
+                              0.1,
+                              1,
+                            ],
+                          ),
+                          borderGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xFFffffff).withOpacity(0.15),
+                              Color((0xFFFFFFFF)).withOpacity(0.9),
+                            ],
+                          ),
                           child: SizedBox(
                             height: 150,
                             child: ClipRRect(
@@ -376,121 +477,74 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          // Expanded(
-          //   flex: 1,
-          //   child: Container(),
-          // ),
           Expanded(
-            flex: 3,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Opacity(
-                    opacity: 0.8,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20.0),
+            flex: 5,
+            //?----------------------- Flipped Cards -----------------------------
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                // shrinkWrap: true,
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), // must be there because of the lag of gridview
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: columnCount,
+                  childAspectRatio: gridAspectRatio,
+                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 1.0,
+                ),
+                itemCount: toShowCards.length, // TODO itemCount: itemCount, define up in the code
+                itemBuilder: (context, index) {
+                  int cardNumber = int.parse(toShowCards[index]);
+                  return Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: GlassmorphicContainer(
+                      width: double.infinity,
+                      height: double.infinity,
+                      borderRadius: 15,
+                      blur: 4,
+                      alignment: Alignment.bottomCenter,
+                      border: 0.5,
+                      linearGradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          const Color.fromARGB(255, 254, 255, 255).withOpacity(0.3),
+                          const Color.fromARGB(255, 255, 255, 255).withOpacity(0.1),
+                        ],
+                        stops: const [
+                          0.1,
+                          1,
+                        ],
                       ),
+                      borderGradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 4, 4, 4).withOpacity(0.9),
+                          Color((0xFFFFFFFF)).withOpacity(0.1),
+                        ],
+                      ),
+                      // todo we dont need this anymore
                       child: Center(
-                        child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: columnCount,
-                            crossAxisSpacing: 1.0,
-                            mainAxisSpacing: 1.0,
-                          ),
-                          itemCount: toShowCards.length, // TODO itemCount: itemCount, define up in the code
-                          itemBuilder: (context, index) {
-                            int cardNumber = int.parse(toShowCards[index]);
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
-                                  ],
-                                  // todo we dont need this anymore
-                                  color: getBackgroundColorMatches(cardNumber),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Colors.orange, width: 3.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${cardNumber}',
-                                    style: const TextStyle(
-                                      fontSize: 26.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Opacity(
-                    opacity: 0.8,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(color: Colors.white.withOpacity(0.5), spreadRadius: 1, blurRadius: 3, offset: const Offset(0, 2))
-                          ],
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.orangeAccent,
-                        ),
-                        child: Center(
-                          child: ListView.builder(
-                            itemCount: 4,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.symmetric(vertical: 8.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  // border: Border.all(color: Colors.white, width: 2.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${index + 1}' " Player",
-                                    style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              );
-                            },
+                        child: Text(
+                          '$cardNumber',
+                          style: const TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white60,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  double get gridAspectRatio => 1.5;
 }
-
-
-// Container(
-//             decoration: BoxDecoration(
-//               gradient: LinearGradient(
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//                 colors: [
-//                   Color(0xFF74EBD5),
-//                   Color(0xFFACD8AA),
-//                 ],
-//               ),
-//             ),
-//           ),
