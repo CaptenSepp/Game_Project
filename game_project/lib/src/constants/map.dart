@@ -65,3 +65,5 @@ final List<String> toShowCards = [
 //   '18': 'assets/08.png',
 //   '19': 'assets/09.png',
 //   '20': 'assets/10.png',
+
+// Colors: red, orange, yellow, green, blue, purple, teal, brown
