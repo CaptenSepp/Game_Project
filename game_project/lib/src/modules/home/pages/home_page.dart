@@ -10,6 +10,8 @@ import 'package:game_project/src/modules/home/components/qr_scan.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import '../../../components/my_glassmorphism.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
   final String title;
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
   List<String> matches = [];
   bool _flipXAxis = false;
-  // created a methodd which calculates the number of rows and columns each time
+  // created a method which calculates the number of rows and columns each time
   int itemCount = 0;
   int columnCount = 0;
 
@@ -170,7 +172,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         matches.add(barcodeResult1!.code!);
         matches.add(barcodeResult2!.code!);
 
-        // to add to flipped and toShowlist Lists in values
+        // to add to flipped and toShowList Lists in values
         flippedCards.add(barcodeResult1!.code!);
         flippedCards.add(barcodeResult2!.code!);
         toShowCards.remove(barcodeResult1!.code!);
@@ -180,16 +182,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
-  // here we calculate how many columns we need for flipped cardds
+  // here we calculate how many columns we need for flipped cards
   void columnCountCalculator() {
-    // here get checked how many cards are remaining unflipped
+    // here get checked how many cards are remaining not flipped
     if (toShowCards.length <= 20 && toShowCards.length > 12) {
       columnCount = 5; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------------
     } else if (toShowCards.length <= 12 && toShowCards.length > 6) {
       columnCount = 4;
     } else if (toShowCards.length <= 6 && toShowCards.length > 2) {
       columnCount = 3;
-      // todo here it should be a error catcher which the numbers doesnt go something fully wrong
+      // todo here it should be a error catcher which the numbers doesn't go something fully wrong
     } else {
       columnCount = 2;
     }
@@ -212,7 +214,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       if (currentBarcodeResult?.code == barcode?.code) {
         // todo we must flip, if new barcode is not the old barcode.
         return;
-        // todo we also must add: dont flip the card if its in the List of flipped cards in the map.dart
+        // todo we also must add: don't flip the card if its in the List of flipped cards in the map.dart
       }
       if (!frontSide[0]) {
         flipCardWithIndex(0);
@@ -287,7 +289,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 image: Image(image: AssetImage('assets/q.png')),
               ),
             ),
-            vsync: this as TickerProvider,
+            vsync: this,
             child: Center(
               child: bodyCreator(),
             ),
@@ -330,33 +332,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 Positioned(
                   top: 50,
                   left: -25, //* -30 left side out of the screen
-                  child: GlassmorphicContainer(
+                  child: MyGlassMorphism(
                     width: 120,
                     height: 170,
-                    borderRadius: 20,
-                    blur: 2,
-                    alignment: Alignment.topCenter,
-                    border: 0.5,
-                    linearGradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 10, 10, 10).withOpacity(0.4),
-                        Color(0xFFFFFFFF).withOpacity(0.0),
-                      ],
-                      stops: const [
-                        0.1,
-                        1,
-                      ],
-                    ),
-                    borderGradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFFffffff).withOpacity(0.15),
-                        Color((0xFFFFFFFF)).withOpacity(0.9),
-                      ],
-                    ),
                     child: ListView.builder(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       itemCount: 4,
@@ -372,7 +350,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(30, 0, 15, 0), //* 30 right side text
-                                // todo, the name text must have a limit and stop where it doesnt fit anymore
+                                // todo, the name text must have a limit and stop where it doesn't fit anymore
                                 child: Text(
                                   '${index + 1}' ". Pla...",
                                   style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
@@ -395,34 +373,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: GlassmorphicContainer(
-                          // todo most these Widgets have variables which dont let the Class to be auto-extracted, what to do?
+                        child: MyGlassMorphism(
                           width: 150,
                           height: 150,
-                          borderRadius: 30,
-                          blur: 2,
-                          alignment: Alignment.bottomCenter,
-                          border: 0,
-                          linearGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
-                              Color(0xFFFFFFFF).withOpacity(0.0),
-                            ],
-                            stops: const [
-                              0.1,
-                              1,
-                            ],
-                          ),
-                          borderGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFFffffff).withOpacity(0.15),
-                              Color((0xFFFFFFFF)).withOpacity(0.9),
-                            ],
-                          ),
                           child: SizedBox(
                             height: 150,
                             child: ClipRRect(
@@ -434,34 +387,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: GlassmorphicContainer(
-                          // todo most these Widgets have variables which dont let the Class to be auto-extracted, what to do?
+                        child: MyGlassMorphism(
                           width: 150,
                           height: 150,
-                          borderRadius: 30,
-                          blur: 2,
-                          alignment: Alignment.bottomCenter,
-                          border: 0,
-                          linearGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
-                              Color(0xFFFFFFFF).withOpacity(0.0),
-                            ],
-                            stops: const [
-                              0.1,
-                              1,
-                            ],
-                          ),
-                          borderGradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFFffffff).withOpacity(0.15),
-                              Color((0xFFFFFFFF)).withOpacity(0.9),
-                            ],
-                          ),
                           child: SizedBox(
                             height: 150,
                             child: ClipRRect(
@@ -483,16 +411,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
               child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 // shrinkWrap: true,
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), // must be there because of the lag of gridview
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), // must be there because of the lag of gridView
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: columnCount,
                   childAspectRatio: gridAspectRatio,
                   crossAxisSpacing: 1.0,
                   mainAxisSpacing: 1.0,
                 ),
-                itemCount: toShowCards.length, // TODO itemCount: itemCount, define up in the code
+                itemCount: toShowCards.length, // todo itemCount, define up in the code
                 itemBuilder: (context, index) {
                   int cardNumber = int.parse(toShowCards[index]);
                   return Padding(
@@ -520,11 +448,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Color.fromARGB(255, 4, 4, 4).withOpacity(0.9),
-                          Color((0xFFFFFFFF)).withOpacity(0.1),
+                          const Color.fromARGB(255, 4, 4, 4).withOpacity(0.9),
+                          const Color((0xFFFFFFFF)).withOpacity(0.1),
                         ],
                       ),
-                      // todo we dont need this anymore
+                      // todo we don't need this anymore
                       child: Center(
                         child: Text(
                           '$cardNumber',
