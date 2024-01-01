@@ -1,10 +1,8 @@
 {
   "yellowTheme": {
     "backgroundColor": "#ffff00",
-    "shade1": "#ffffe0",
-    "shade2": "#ffffc0",
-    "shade3": "#ffffa0",
-    "shade4": "#ffff80"
+    "Button Colors": "#ffffa0",
+    "BackgroundImage": "#ffff80"
   },
   "redTheme": {
     "backgroundColor": "#ff0000",
