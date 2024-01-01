@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
-class MyGlassMorphism extends StatelessWidget {
+class MyGlassmorphic extends StatelessWidget {
   final double width;
   final double height;
   final Widget child;
+  final double borderRadius;
 
-  const MyGlassMorphism({
+  const MyGlassmorphic({
     super.key,
     required this.width,
     required this.height,
     required this.child,
+    required this.borderRadius,
   });
 
   @override
@@ -18,15 +20,15 @@ class MyGlassMorphism extends StatelessWidget {
     return GlassmorphicContainer(
       width: width,
       height: height,
-      borderRadius: 20,
-      blur: 2,
+      borderRadius: borderRadius,
+      blur: 5,
       alignment: Alignment.topCenter,
-      border: 0.5,
+      border: 1,
       linearGradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
         colors: [
-          const Color.fromARGB(255, 10, 10, 10).withOpacity(0.4),
+          Color.fromARGB(220, 249, 249, 249).withOpacity(0.4),
           const Color(0xFFFFFFFF).withOpacity(0.0),
         ],
         stops: const [
@@ -35,8 +37,8 @@ class MyGlassMorphism extends StatelessWidget {
         ],
       ),
       borderGradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
         colors: [
           const Color(0xFFffffff).withOpacity(0.15),
           const Color((0xFFFFFFFF)).withOpacity(0.9),
