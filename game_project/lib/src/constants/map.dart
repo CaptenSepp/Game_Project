@@ -11,14 +11,14 @@ final Map<String, String> qrToImageMap = {
   '10': 'assets/05.png',
   '11': 'assets/06.png',
   '12': 'assets/06.png',
-  '13': 'assets/07.png',
-  '14': 'assets/07.png',
-  '15': 'assets/08.png',
-  '16': 'assets/08.png',
-  '17': 'assets/09.png',
-  '18': 'assets/09.png',
-  '19': 'assets/10.png',
-  '20': 'assets/10.png',
+  // '13': 'assets/07.png',
+  // '14': 'assets/07.png',
+  // '15': 'assets/08.png',
+  // '16': 'assets/08.png',
+  // '17': 'assets/09.png',
+  // '18': 'assets/09.png',
+  // '19': 'assets/10.png',
+  // '20': 'assets/10.png',
 };
 
 final List<String> flippedCards = [];
@@ -35,14 +35,14 @@ final List<String> toShowCards = [
   "10",
   "11",
   "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
+  // "13",
+  // "14",
+  // "15",
+  // "16",
+  // "17",
+  // "18",
+  // "19",
+  // "20",
 ];
 
 // '1': 'assets/01.png',
@@ -65,5 +65,3 @@ final List<String> toShowCards = [
 //   '18': 'assets/08.png',
 //   '19': 'assets/09.png',
 //   '20': 'assets/10.png',
-
-// Colors: red, orange, yellow, green, blue, purple, teal, brown
