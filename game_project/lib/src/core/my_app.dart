@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:game_project/src/modules/home/pages/home_page.dart';
-import 'package:game_project/src/modules/home/pages/test.dart';
-import 'package:game_project/test.dart';
+// import 'package:game_project/src/modules/home/pages/test.dart';
+// import 'package:game_project/test.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // primarySwatch: Colors.orange,
       ),
-      home: const HomePage(title: 'Memory Mayhem'),
+      home: const HomePage(title: ''),
       // home: const Test(title: 'Memory Mayhem'),
     );
   }

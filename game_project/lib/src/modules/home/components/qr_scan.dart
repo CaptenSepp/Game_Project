@@ -40,7 +40,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     return Column(
       children: <Widget>[
         Expanded(
-          flex: 5, // TODO must delete
+          flex: 5, // todo must delete
           child: QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,

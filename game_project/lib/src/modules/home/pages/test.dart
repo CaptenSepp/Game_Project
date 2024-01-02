@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
@@ -7,7 +9,7 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Modern Advanced Layout with Glassmorphism'),
+        title: const Text('Modern Advanced Layout with Glassmorphism'),
       ),
       body: SafeArea(
         child: Stack(
@@ -34,8 +36,8 @@ class Test extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
-                    Color(0xFFFFFFFF).withOpacity(0.0),
+                    const Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
+                    const Color(0xFFFFFFFF).withOpacity(0.0),
                   ],
                   stops: const [
                     0.1,
@@ -46,8 +48,8 @@ class Test extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFFffffff).withOpacity(0.15),
-                    Color((0xFFFFFFFF)).withOpacity(0.9),
+                    const Color(0xFFffffff).withOpacity(0.15),
+                    const Color((0xFFFFFFFF)).withOpacity(0.9),
                   ],
                 ),
                 child: null,
