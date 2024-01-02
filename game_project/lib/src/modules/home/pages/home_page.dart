@@ -243,13 +243,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Expanded(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/bg1.jpg"), fit: BoxFit.cover),
-            ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage("assets/bg1.jpg"), fit: BoxFit.cover),
           ),
         ),
         Scaffold(
@@ -281,7 +279,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 // spawnOpacity: 0.6,
                 // baseColor: Colors.red,
-                image: Image(image: AssetImage('assets/q.png')),
+                image: Image(image: AssetImage('assets/qmark bg.png')),
               ),
             ),
             vsync: this as TickerProvider,
