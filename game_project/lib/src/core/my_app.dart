@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Memory Mayhem',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        // primarySwatch: Colors.orange,
       ),
       home: const HomePage(title: 'Memory Mayhem'),
       // home: const Test(title: 'Memory Mayhem'),

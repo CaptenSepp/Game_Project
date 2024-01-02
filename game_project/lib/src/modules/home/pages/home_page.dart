@@ -254,11 +254,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         Scaffold(
           // extendBodyBehindAppBar: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
           appBar: AppBar(
-            title: Text(widget.title),
-            leading: IconButton(onPressed: restartAndShuffle, icon: const Icon(Icons.refresh_rounded)),
-            backgroundColor: Colors.transparent,
+            title: Text(
+              widget.title,
+              style: const TextStyle(color: Colors.white),
+            ),
+            leading: IconButton(
+              color: Colors.white,
+              onPressed: restartAndShuffle,
+              icon: const Icon(Icons.refresh_rounded),
+            ),
+            backgroundColor: const Color.fromARGB(0, 251, 251, 251),
             elevation: 0,
           ),
           body: AnimatedBackground(
@@ -320,11 +327,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: GlassmorphicContainer(
                           width: 150,
                           height: 150,
-                          borderRadius: 10,
+                          borderRadius: 30,
                           blur: 5,
                           alignment: Alignment.bottomCenter,
                           border: 0,
@@ -358,9 +365,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Opacity(
-                          opacity: 0.7,
+                        padding: const EdgeInsets.all(5.0),
+                        child: GlassmorphicContainer(
+                          width: 150,
+                          height: 150,
+                          borderRadius: 30,
+                          blur: 5,
+                          alignment: Alignment.bottomCenter,
+                          border: 0,
+                          linearGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 98, 41, 230).withOpacity(0.3),
+                              Color(0xFFFFFFFF).withOpacity(0.0),
+                            ],
+                            stops: const [
+                              0.1,
+                              1,
+                            ],
+                          ),
+                          borderGradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xFFffffff).withOpacity(0.15),
+                              Color((0xFFFFFFFF)).withOpacity(0.9),
+                            ],
+                          ),
                           child: SizedBox(
                             height: 150,
                             child: ClipRRect(
