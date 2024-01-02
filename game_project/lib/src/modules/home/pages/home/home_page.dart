@@ -322,7 +322,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ),
                         ),
                         Positioned(
-                          // bottom: 0, // TODO i don't know what this line is for
                           bottom: 20,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
