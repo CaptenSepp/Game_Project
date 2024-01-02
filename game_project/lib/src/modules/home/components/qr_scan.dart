@@ -6,12 +6,12 @@ import 'package:game_project/src/constants/map.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRViewExample extends StatefulWidget {
-  final void Function(Barcode?) flipCart;
+  final void Function(Barcode?) flipCard;
   final void Function(Barcode?) changeBarcodeResult;
 
   const QRViewExample({
     Key? key,
-    required this.flipCart,
+    required this.flipCard,
     required this.changeBarcodeResult,
   }) : super(key: key);
 
@@ -72,7 +72,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   void acceptBarcodeAndShowCart(Barcode scanBarcodeData) {
     barcodeResult = scanBarcodeData;
-    widget.flipCart(scanBarcodeData);
+    widget.flipCard(scanBarcodeData);
     widget.changeBarcodeResult(scanBarcodeData);
     canScan = false;
     Timer(const Duration(seconds: 2), () {

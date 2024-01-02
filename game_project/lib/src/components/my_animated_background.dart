@@ -26,9 +26,7 @@ class _MyAnimatedBackgroundState extends State<MyAnimatedBackground> with Ticker
           maxOpacity: .8,
           minOpacity: .5,
 
-          ///// spawnOpacity: 0.6,
-          //// baseColor: Colors.red,
-          // image: Image(image: AssetImage('assets/q.png')),
+          image: Image(image: AssetImage('assets/qmark bg.png')),
         ),
       ),
       vsync: this,
