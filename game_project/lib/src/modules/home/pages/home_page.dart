@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:game_project/src/components/my_animated_background.dart';
 import 'package:game_project/src/components/my_flipping_card.dart';
+import 'package:game_project/src/components/my_qr_view.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
@@ -77,16 +78,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     // Check if the new barcode result is different from the current one
     if (currentBarcodeResult?.code != newBarcode?.code) {
       // if you want to change to not be same barcode as before, then check here, means new must be different than current barcode
-      setState(() {
-        // Update the barcode result and trigger a state change
-        currentBarcodeResult = newBarcode;
-        if (barcodeResult1 == null) {
-          barcodeResult1 = newBarcode;
-          // ignore: prefer_conditional_assignment
-        } else if (barcodeResult2 == null) {
-          barcodeResult2 = newBarcode;
-        }
-      });
+      setState(
+        () {
+          // Update the barcode result and trigger a state change
+          currentBarcodeResult = newBarcode;
+          if (barcodeResult1 == null) {
+            barcodeResult1 = newBarcode;
+            // ignore: prefer_conditional_assignment
+          } else if (barcodeResult2 == null) {
+            barcodeResult2 = newBarcode;
+          }
+        },
+      );
     }
   }
 
@@ -282,94 +285,79 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ],
           ), //?----------------------- Animated background  -----------------------------
-          body: MyAnimatedBackground(child: homepageBody()),
-        ),
-      ],
-    );
-  }
-
-  //?----------------------- Scaffolds body -----------------------------
-  Padding homepageBody() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Expanded(
-            flex: 13,
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: [
-                //?----------------------- QR Scanner camera -----------------------------
-                Opacity(
-                  opacity: 0.9,
-                  // TODO i need a very small shadow under this screen
-                  child: Positioned.fill(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(75),
-                        child: QRViewExample(
-                          flipCart: whichCardMustFlip,
+          body: MyAnimatedBackground(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Expanded(
+                    flex: 13,
+                    child: Stack(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      children: [
+                        //?----------------------- QR Scanner camera -----------------------------
+                        MyQRViewOpacity(
+                          flipCard: whichCardMustFlip,
                           changeBarcodeResult: changeBarcodeResult,
                         ),
-                      ),
+                        //?----------------------- Leader-board  -----------------------------
+                        const Positioned(
+                          top: 50,
+                          left: -25, //* -30 left side out of the screen
+                          child: MyGlassmorphic(
+                            width: 120,
+                            height: 170,
+                            borderRadius: 20,
+                            child: MyLeaderboardListView(),
+                          ),
+                        ),
+                        Positioned(
+                          // bottom: 0, // TODO i don't know what this line is for
+                          bottom: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            //?----------------------- Flipping Cards -----------------------------
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: MyGlassmorphic(
+                                  width: 150,
+                                  height: 150,
+                                  borderRadius: 20,
+                                  child: MyFlippingCard(child: _buildFlipAnimationAct(0)),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: MyGlassmorphic(
+                                  width: 150,
+                                  height: 150,
+                                  borderRadius: 20,
+                                  child: MyFlippingCard(child: _buildFlipAnimationAct(1)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                //?----------------------- Leader-board  -----------------------------
-                const Positioned(
-                  top: 50,
-                  left: -25, //* -30 left side out of the screen
-                  child: MyGlassmorphic(
-                    width: 120,
-                    height: 170,
-                    borderRadius: 20,
-                    child: MyLeaderboardListView(),
+                  Expanded(
+                    flex: 5,
+                    //?----------------------- Flipped Cards -----------------------------
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
+                    ),
                   ),
-                ),
-                Positioned(
-                  // bottom: 0, // TODO i don't know what this line is for
-                  bottom: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    //?----------------------- Flipping Cards -----------------------------
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: MyGlassmorphic(
-                          width: 150,
-                          height: 150,
-                          borderRadius: 20,
-                          child: MyFlippingCard(child: _buildFlipAnimationAct(0)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: MyGlassmorphic(
-                          width: 150,
-                          height: 150,
-                          borderRadius: 20,
-                          child: MyFlippingCard(child: _buildFlipAnimationAct(1)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          Expanded(
-            flex: 5,
-            //?----------------------- Flipped Cards -----------------------------
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
