@@ -34,6 +34,8 @@ class MyFlippedcardsGridview extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             borderRadius: 10,
+            blur: 3,
+            border: 1,
             child: Center(
               child: Text(
                 '$cardNumber',

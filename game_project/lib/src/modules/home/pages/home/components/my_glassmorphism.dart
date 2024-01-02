@@ -6,6 +6,8 @@ class MyGlassmorphic extends StatelessWidget {
   final double height;
   final Widget child;
   final double borderRadius;
+  final double blur;
+  final double border;
 
   const MyGlassmorphic({
     super.key,
@@ -13,6 +15,8 @@ class MyGlassmorphic extends StatelessWidget {
     required this.height,
     required this.child,
     required this.borderRadius,
+    required this.blur,
+    required this.border,
   });
 
   @override
@@ -21,14 +25,14 @@ class MyGlassmorphic extends StatelessWidget {
       width: width,
       height: height,
       borderRadius: borderRadius,
-      blur: 5,
+      blur: blur,
       alignment: Alignment.topCenter,
-      border: 1,
+      border: border,
       linearGradient: LinearGradient(
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
         colors: [
-          Color.fromARGB(220, 249, 249, 249).withOpacity(0.4),
+          Color.fromARGB(255, 0, 255, 51).withOpacity(0.3),
           const Color(0xFFFFFFFF).withOpacity(0.0),
         ],
         stops: const [
@@ -40,8 +44,8 @@ class MyGlassmorphic extends StatelessWidget {
         begin: Alignment.bottomLeft,
         end: Alignment.topRight,
         colors: [
-          const Color(0xFFffffff).withOpacity(0.15),
-          const Color((0xFFFFFFFF)).withOpacity(0.9),
+          const Color(0xFFffffff).withOpacity(0.1),
+          Color.fromARGB(255, 0, 255, 51).withOpacity(0.9),
         ],
       ),
       child: child,
