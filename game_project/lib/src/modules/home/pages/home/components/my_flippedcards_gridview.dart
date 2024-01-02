@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/map.dart';
+import '../../../../../constants/map.dart';
 import 'my_glassmorphism.dart';
 
 class MyFlippedcardsGridview extends StatelessWidget {

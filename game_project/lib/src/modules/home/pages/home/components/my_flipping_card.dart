@@ -12,10 +12,13 @@ class MyFlippingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
-      child: ClipRRect(
+      child: ClipRRect( // TODO, must be tested what happens if this wieget removes
         borderRadius: BorderRadius.circular(40),
         child: child,
       ),
     );
   }
+  
 }
+
+

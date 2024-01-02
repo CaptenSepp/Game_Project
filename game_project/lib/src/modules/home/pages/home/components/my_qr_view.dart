@@ -20,7 +20,7 @@ class MyQRViewOpacity extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(75),
+            borderRadius: BorderRadius.circular(55),
             child: QRViewExample(
               flipCard: flipCard,
               changeBarcodeResult: changeBarcodeResult,
