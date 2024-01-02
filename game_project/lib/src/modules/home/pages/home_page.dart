@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:game_project/src/components/my_animated_background.dart';
 import 'package:game_project/src/components/my_flipping_card.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
@@ -282,25 +282,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ],
           ), //?----------------------- Animated background  -----------------------------
-          body: AnimatedBackground(
-            behaviour: RandomParticleBehaviour(
-              options: const ParticleOptions(
-                spawnMaxRadius: 80,
-                spawnMinRadius: 40,
-                spawnMaxSpeed: 250,
-                spawnMinSpeed: 100,
-                particleCount: 0, // must have amount to start working
-                maxOpacity: .8,
-                minOpacity: .5,
-
-                ///// spawnOpacity: 0.6,
-                //// baseColor: Colors.red,
-                // image: Image(image: AssetImage('assets/q.png')),
-              ),
-            ),
-            vsync: this,
-            child: homepageBody(), // TODO, i tried to make AnimatedBackground also a extra widget but because of vsync i couldn't
-          ),
+          body: MyAnimatedBackground(child: homepageBody()),
         ),
       ],
     );
@@ -391,5 +373,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  double get gridAspectRatio => 1.5;
+  double get gridAspectRatio => 1.5; // TODO, Arman i tried to put this method up with others but i get an error for that
+  // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
 }
