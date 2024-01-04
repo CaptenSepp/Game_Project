@@ -7,6 +7,7 @@ import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_animated_background.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_flipping_cards.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_qr_view.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -323,34 +324,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         Positioned(
                           bottom: 20,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-
-                            //?----------------------- Flipping Cards -----------------------------
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: MyGlassmorphic(
-                                  width: 150,
-                                  height: 150,
-                                  borderRadius: 40,
-                                  blur: 3,
-                                  border: 1,
-                                  child: MyFlippingCardBase(child: _buildFlipAnimationAct(0)),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: MyGlassmorphic(
-                                  width: 150,
-                                  height: 150,
-                                  borderRadius: 40,
-                                  blur: 3,
-                                  border: 1,
-                                  child: MyFlippingCardBase(child: _buildFlipAnimationAct(1)),
-                                ),
-                              ),
-                            ],
+                          //?----------------------- Flipping Cards -----------------------------
+                          child: MyFlippingCards(
+                            animationAct1: _buildFlipAnimationAct(0),
+                            animationAct2: _buildFlipAnimationAct(1),
                           ),
                         ),
                       ],
@@ -359,10 +336,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   Expanded(
                     flex: 5,
                     //?----------------------- Flipped Cards -----------------------------
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                      child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
-                    ),
+                    child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
                   ),
                 ],
               ),
