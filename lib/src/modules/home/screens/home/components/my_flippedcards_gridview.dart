@@ -18,7 +18,8 @@ class MyFlippedcardsGridview extends StatelessWidget {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       // shrinkWrap: true,
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), // must be there because of the lag of gridView
+      padding: const EdgeInsets.fromLTRB(
+          0, 0, 0, 0), // must be there because of the lag of gridView
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columnCount,
         childAspectRatio: gridAspectRatio,
