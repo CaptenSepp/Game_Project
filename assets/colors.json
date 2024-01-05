@@ -1,0 +1,19 @@
+{
+  "colots": [
+    {
+      "id": "GreenTheme",
+      "BackgroundImage": "assets/green_bg.png",
+      "ButtonColor": "#80ff00"
+    },
+    {
+      "id": "PurpleTheme",
+      "BackgroundImage": "assets/purple_bg.png",
+      "ButtonColor": "#6000ff"
+    },
+    {
+      "id": "OrangeTheme",
+      "BackgroundImage": "assets/orange_bg.png",
+      "ButtonColor": "#ff6000"
+    }
+  ]
+}
