@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_project/src/modules/home/screens/home/home_page.dart';
+import 'package:game_project/src/modules/home/pages/home/home_page.dart';
 // import 'package:game_project/src/modules/home/pages/test.dart';
 // import 'package:game_project/test.dart';
 
@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Memory Mayhem',
       theme: ThemeData(
-          // primarySwatch: Colors.orange,
-          ),
+        // primarySwatch: Colors.orange,
+      ),
       home: const HomePage(title: ''),
       // home: const Test(title: 'Memory Mayhem'),
     );

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
-import 'package:game_project/src/modules/home/screens/home/components/my_animated_background.dart';
-import 'package:game_project/src/modules/home/screens/home/components/my_flipping_card.dart';
-import 'package:game_project/src/modules/home/screens/home/components/my_qr_view.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_animated_background.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_qr_view.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'components/my_flippedcards_gridview.dart';
@@ -28,10 +28,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Barcode? barcodeResult1; // first card
   Barcode? barcodeResult2; // second card
 
-  List<bool> frontSide = [
-    false,
-    false
-  ]; // front side which we see, false means question, true means Photo
+  List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
   List<String> matches = [];
   bool _flipXAxis = false;
   // created a method which calculates the number of rows and columns each time
@@ -115,17 +112,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return AnimatedSwitcher(
       // AnimatedSwitcher for smooth transitions between widget changes
       duration: const Duration(milliseconds: 600),
-      transitionBuilder: (widget, animation) =>
-          __transitionBuilder(widget, animation, _flipXAxis),
-      child:
-          frontSide[index] ? _buildPhotoSide(index) : _buildQuestionSide(index),
+      transitionBuilder: (widget, animation) => __transitionBuilder(widget, animation, _flipXAxis),
+      child: frontSide[index] ? _buildPhotoSide(index) : _buildQuestionSide(index),
     );
   }
 
   void flipCardWithIndex(int index) {
     setState(() {
-      frontSide[index] = !frontSide[
-          index]; // flips any index we give to it, from true to false from false to true
+      frontSide[index] = !frontSide[index]; // flips any index we give to it, from true to false from false to true
       _flipXAxis = !_flipXAxis; // Toggle the flipXAxis flag
       if (frontSide[0] && frontSide[1]) {
         Timer(Values.showSnackBarDelay, () {
@@ -196,8 +190,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void columnCountCalculator() {
     // here get checked how many cards are remaining not flipped
     if (toShowCards.length <= 20 && toShowCards.length > 12) {
-      columnCount =
-          5; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------------
+      columnCount = 5; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------------
     } else if (toShowCards.length <= 12 && toShowCards.length > 6) {
       columnCount = 4;
     } else if (toShowCards.length <= 6 && toShowCards.length > 2) {
@@ -217,8 +210,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   bool doesPhotosMatch() {
-    return (qrToImageMap[barcodeResult1?.code] ==
-        qrToImageMap[barcodeResult2?.code]);
+    return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
 
   void whichCardMustFlip(Barcode? barcode) {
@@ -236,8 +228,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
-  Widget __transitionBuilder(
-      Widget widget, Animation<double> animation, bool flipXAxis) {
+  Widget __transitionBuilder(Widget widget, Animation<double> animation, bool flipXAxis) {
     final rotateAnim = Tween(begin: math.pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
       animation: rotateAnim,
@@ -272,8 +263,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
+              image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
             ),
           ),
         ),
@@ -343,8 +333,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   width: 150,
                                   height: 150,
                                   borderRadius: 40,
-                                  child: MyFlippingCard(
-                                      child: _buildFlipAnimationAct(0)),
+                                  child: MyFlippingCard(child: _buildFlipAnimationAct(0)),
                                 ),
                               ),
                               Padding(
@@ -353,8 +342,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   width: 150,
                                   height: 150,
                                   borderRadius: 40,
-                                  child: MyFlippingCard(
-                                      child: _buildFlipAnimationAct(1)),
+                                  child: MyFlippingCard(child: _buildFlipAnimationAct(1)),
                                 ),
                               ),
                             ],
@@ -368,9 +356,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     //?----------------------- Flipped Cards -----------------------------
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                      child: MyFlippedcardsGridview(
-                          columnCount: columnCount,
-                          gridAspectRatio: gridAspectRatio),
+                      child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
                     ),
                   ),
                 ],
@@ -382,7 +368,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  double get gridAspectRatio =>
-      1.5; // TODO, Arman i tried to put this method up with others but i get an error for that
+  double get gridAspectRatio => 1.5; // TODO, Arman i tried to put this method up with others but i get an error for that
   // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
 }
