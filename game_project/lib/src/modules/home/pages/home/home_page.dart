@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
@@ -108,6 +109,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void showPopupSetting() {
+    //TODO: use asset pass
+    AudioPlayer().play(AssetSource('path'));
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
