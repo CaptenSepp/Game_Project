@@ -47,30 +47,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Restart the Game"),
-        content: const Text("Are you sure you want to restart the Game?"),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                clearAllBarcodes();
-                frontSide = [false, false];
-                matches = [];
-                _flipXAxis = false;
-                shuffleMapValues(qrToImageMap);
-                shuffleColor(defaultColor);
-                Navigator.of(context).pop();
-              });
-            },
-            child: const Text("Restart and Shuffle!!!"),
+        elevation: 0,
+        backgroundColor: Colors.black.withOpacity(.3),
+        // title: const Text("Restart the Game"),
+        content: MyGlassmorphic(
+          width: 300,
+          height: 300,
+          borderRadius: 45,
+          blur: 1,
+          border: 1,
+          child: Column(
+            children: [
+              const Text(
+                "Are you sure you want to restart the Game?",
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    clearAllBarcodes();
+                    frontSide = [false, false];
+                    matches = [];
+                    _flipXAxis = false;
+                    shuffleMapValues(qrToImageMap);
+                    shuffleColor(defaultColor);
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: const Text("Restart and Shuffle!!!"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    clearAllBarcodes();
+                    frontSide = [false, false];
+                    matches = [];
+                    _flipXAxis = false;
+                    shuffleMapValues(qrToImageMap);
+                    shuffleColor(defaultColor);
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: const Text("Restart and Shuffle!!!"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("No"),
+              )
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text("No"),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -80,7 +107,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     defaultColor.shuffle(random);
   }
 
-  void showPopupDialog() {
+  void showPopupSetting() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -335,7 +362,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             actions: [
               IconButton(
                 alignment: Alignment.topLeft,
-                onPressed: showPopupDialog,
+                onPressed: showPopupSetting,
                 icon: const Icon(
                   Icons.menu,
                   size: 35,
