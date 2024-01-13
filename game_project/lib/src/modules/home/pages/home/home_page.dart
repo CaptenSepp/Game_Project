@@ -337,6 +337,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         MyQRViewOpacity(
                           flipCard: whichCardMustFlip,
                           changeBarcodeResult: changeBarcodeResult,
+                          matches: matches,
                         ),
                         //?----------------------- Leader-board  -----------------------------
                         const Positioned(
