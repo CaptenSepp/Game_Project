@@ -22,11 +22,11 @@ class _MyAnimatedBackgroundState extends State<MyAnimatedBackground> with Ticker
           spawnMinRadius: 40,
           spawnMaxSpeed: 250,
           spawnMinSpeed: 100,
-          particleCount: 0, // must have amount to start working
+          particleCount: 10, // must have amount to start working
           maxOpacity: .8,
           minOpacity: .5,
 
-          image: Image(image: AssetImage('assets/qmark bg.png')),
+          image: Image(image: AssetImage('assets/qmark card.png')),
         ),
       ),
       vsync: this,

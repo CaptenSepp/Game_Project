@@ -6,7 +6,7 @@ import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_animated_background.dart';
-import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card_base.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_flipping_cards.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_qr_view.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';

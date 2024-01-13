@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card.dart';
+import 'package:game_project/src/modules/home/pages/home/components/my_flipping_card_base.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_glassmorphism.dart';
 
 class MyFlippingCards extends StatelessWidget {
