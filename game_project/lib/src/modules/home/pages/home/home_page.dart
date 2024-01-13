@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     columnCountCalculator();
     // shuffleMapValues(qrToImageMap);
+    shuffleColor(defaultColor);
     super.initState();
   }
 
