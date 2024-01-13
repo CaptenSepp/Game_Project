@@ -67,6 +67,18 @@ class _QRViewExampleState extends State<QRViewExample> {
               // added for if not matched
               if (notInMatches(scanData.code ?? '')) {
                 acceptBarcodeAndShowCart(scanData);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('You found this before!!!'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                canScan = false;
+                Timer(const Duration(seconds: 2), () {
+                  canScan = true;
+                });
+                return;
               }
             }
           }
