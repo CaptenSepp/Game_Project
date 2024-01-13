@@ -304,14 +304,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: defaultColor[0], ////////////////////////////////////////////////////////////////////////////////////////
+              color: defaultColor[0].withOpacity(.5) ////////////////////////////////////////////////////////////////////////////////////////
               // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
             ),
           ),
         ),
         Scaffold(
           extendBodyBehindAppBar: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.black54,
 
           //?----------------------- App bar -----------------------------
           appBar: AppBar(
