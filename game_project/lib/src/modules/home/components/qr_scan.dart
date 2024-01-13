@@ -64,6 +64,7 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           if (canScan) {
             if (keyExist(scanData.code ?? '')) {
+              // added for if not matched
               if (notInMatches(scanData.code ?? '')) {
                 acceptBarcodeAndShowCart(scanData);
               }
