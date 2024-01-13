@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_project/src/constants/map.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
 class MyGlassmorphic extends StatelessWidget {
@@ -32,7 +33,7 @@ class MyGlassmorphic extends StatelessWidget {
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
         colors: [
-          Color.fromARGB(255, 0, 255, 51).withOpacity(0.3),
+          defaultColor[0].withOpacity(0.3),
           const Color(0xFFFFFFFF).withOpacity(0.0),
         ],
         stops: const [
@@ -45,7 +46,7 @@ class MyGlassmorphic extends StatelessWidget {
         end: Alignment.topRight,
         colors: [
           const Color(0xFFffffff).withOpacity(0.1),
-          Color.fromARGB(255, 0, 255, 51).withOpacity(0.9),
+          defaultColor[0].withOpacity(0.9),
         ],
       ),
       child: child,

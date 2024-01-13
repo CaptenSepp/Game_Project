@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 matches = [];
                 _flipXAxis = false;
                 shuffleMapValues(qrToImageMap);
+                shuffleColor(defaultColor);
                 Navigator.of(context).pop();
               });
             },
@@ -71,6 +72,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  void shuffleColor(List<Color> defaultColor) {
+    final math.Random random = math.Random();
+    defaultColor.shuffle(random);
   }
 
   void changeBarcodeResult(Barcode? newBarcode) {
@@ -168,8 +174,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     // Update the original map with shuffled values
     map.clear();
     map.addAll(shuffledMap);
-
-    
   }
 
   void addToMatches() {

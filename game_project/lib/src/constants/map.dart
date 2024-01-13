@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 final Map<String, String> qrToImageMap = {
   '1': 'assets/01.png',
   '2': 'assets/01.png',
@@ -45,4 +47,11 @@ final List<String> toShowCards = [
   // "20",
 ];
 
-// final List<> defaultColor = [];
+List<Color> defaultColor = [
+  const Color(0xFFFF0000),
+  const Color(0xFF00FF00),
+  const Color(0xFF0000FF),
+  const Color(0xFFFF00FF),
+  const Color(0xFFFFFF00),
+  const Color(0xFF00FFFF),
+];
