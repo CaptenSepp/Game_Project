@@ -8,11 +8,13 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 class QRViewExample extends StatefulWidget {
   final void Function(Barcode?) flipCard;
   final void Function(Barcode?) changeBarcodeResult;
+  final List<String> matches;
 
   const QRViewExample({
     Key? key,
     required this.flipCard,
     required this.changeBarcodeResult,
+    required this.matches,
   }) : super(key: key);
 
   @override
@@ -62,12 +64,18 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           if (canScan) {
             if (keyExist(scanData.code ?? '')) {
-              acceptBarcodeAndShowCart(scanData);
+              if (notInMatches(scanData.code ?? '')) {
+                acceptBarcodeAndShowCart(scanData);
+              }
             }
           }
         },
       );
     });
+  }
+
+  bool notInMatches(String code) {
+    return !widget.matches.contains(code);
   }
 
   void acceptBarcodeAndShowCart(Barcode scanBarcodeData) {

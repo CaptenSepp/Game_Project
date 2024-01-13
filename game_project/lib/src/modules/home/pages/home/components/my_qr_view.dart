@@ -5,10 +5,13 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 class MyQRViewOpacity extends StatelessWidget {
   final void Function(Barcode?) flipCard;
   final void Function(Barcode?) changeBarcodeResult;
+  final List<String> matches;
+
   const MyQRViewOpacity({
     super.key,
     required this.flipCard,
     required this.changeBarcodeResult,
+    required this.matches,
   });
 
   @override
@@ -24,6 +27,7 @@ class MyQRViewOpacity extends StatelessWidget {
             child: QRViewExample(
               flipCard: flipCard,
               changeBarcodeResult: changeBarcodeResult,
+               matches: matches,
             ),
           ),
         ),
