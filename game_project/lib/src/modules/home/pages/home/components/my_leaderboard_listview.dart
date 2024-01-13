@@ -12,7 +12,7 @@ class MyLeaderboardListView extends StatelessWidget {
       itemCount: 4,
       itemBuilder: (context, index) {
         return Container(
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
+          margin: const EdgeInsets.symmetric(vertical: 4.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             // border: Border.all(color: Colors.white, width: 2.0),
@@ -25,7 +25,10 @@ class MyLeaderboardListView extends StatelessWidget {
                 // todo, the name text must have a limit and stop where it doesn't fit anymore
                 child: Text(
                   '${index + 1}' ". Pla...",
-                  style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

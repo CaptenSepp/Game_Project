@@ -17,7 +17,7 @@ class MyFlippingCards extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: MyGlassmorphic(
             width: 150,
             height: 150,
@@ -28,7 +28,7 @@ class MyFlippingCards extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: MyGlassmorphic(
             width: 150,
             height: 150,

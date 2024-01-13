@@ -16,11 +16,11 @@ class MyQRViewOpacity extends StatelessWidget {
     return Opacity(
       opacity: 0.9,
       // TODO i need a very small shadow under this screen
-      child: Positioned.fill(
+      child: Positioned(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          padding: const EdgeInsets.fromLTRB(10, 2, 10, 10),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(55),
+            borderRadius: BorderRadius.circular(15),
             child: QRViewExample(
               flipCard: flipCard,
               changeBarcodeResult: changeBarcodeResult,

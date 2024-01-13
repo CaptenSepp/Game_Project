@@ -16,7 +16,7 @@ class MyFlippedcardsGridview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         // shrinkWrap: true,
@@ -24,14 +24,14 @@ class MyFlippedcardsGridview extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columnCount,
           childAspectRatio: gridAspectRatio,
-          crossAxisSpacing: 1.0,
-          mainAxisSpacing: 1.0,
+          // crossAxisSpacing: 10.0,
+          // mainAxisSpacing: 10.0,
         ),
-        itemCount: toShowCards.length, // todo itemCount, define up in the code
+        itemCount: toShowCards.length, // TODO itemCount, define up in the code
         itemBuilder: (context, index) {
           int cardNumber = int.parse(toShowCards[index]);
           return Padding(
-            padding: const EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(5.0),
             child: MyGlassmorphic(
               width: double.infinity,
               height: double.infinity,
@@ -42,7 +42,7 @@ class MyFlippedcardsGridview extends StatelessWidget {
                 child: Text(
                   '$cardNumber',
                   style: const TextStyle(
-                    fontSize: 30.0,
+                    fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white60,
                   ),

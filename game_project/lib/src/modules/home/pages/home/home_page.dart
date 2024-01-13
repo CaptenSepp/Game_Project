@@ -264,7 +264,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
+              color: Color.fromARGB(255, 1, 39, 9),
+              // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
             ),
           ),
         ),
@@ -291,6 +292,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   color: Colors.white,
                 ),
               ),
+              IconButton(
+                alignment: Alignment.topLeft,
+                onPressed: restartAndShuffle,
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                  size: 35,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                alignment: Alignment.topLeft,
+                onPressed: restartAndShuffle,
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                  size: 35,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ), //?----------------------- Animated background  -----------------------------
           body: MyAnimatedBackground(
@@ -299,8 +318,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  const Expanded(
+                    child: SizedBox.shrink(),
+                  ),
                   Expanded(
-                    flex: 13,
+                    flex: 6,
+                    //?----------------------- Flipped Cards -----------------------------
+                    child: MyFlippedcardsGridview(
+                      columnCount: columnCount,
+                      gridAspectRatio: gridAspectRatio,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 25,
                     child: Stack(
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
@@ -311,11 +341,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         //?----------------------- Leader-board  -----------------------------
                         const Positioned(
-                          top: 50,
+                          top: 15,
                           left: -25, //* -30 left side out of the screen
                           child: MyGlassmorphic(
-                            width: 120,
-                            height: 170,
+                            width: 100,
+                            height: 110,
                             borderRadius: 20,
                             blur: 6,
                             border: 1,
@@ -323,7 +353,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ),
                         ),
                         Positioned(
-                          bottom: 20,
+                          bottom: 15,
                           //?----------------------- Flipping Cards -----------------------------
                           child: MyFlippingCards(
                             animationAct1: _buildFlipAnimationAct(0),
@@ -332,11 +362,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    //?----------------------- Flipped Cards -----------------------------
-                    child: MyFlippedcardsGridview(columnCount: columnCount, gridAspectRatio: gridAspectRatio),
                   ),
                 ],
               ),
@@ -347,6 +372,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  double get gridAspectRatio => 1.5; // TODO, Arman i tried to put this method up with others but i get an error for that
+  double get gridAspectRatio => 2; // TODO, Arman, i tried to put this method up with others but i get an error for that
   // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
 }
