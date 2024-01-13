@@ -41,6 +41,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     columnCountCalculator();
     // shuffleMapValues(qrToImageMap);
     shuffleColor(defaultColor);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      showPopupSetting();
+    });
     super.initState();
   }
 
@@ -110,7 +113,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   void showPopupSetting() {
     //TODO: use asset pass
-    AudioPlayer().play(AssetSource('path'));
+    final audio = AudioPlayer();
+    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -150,7 +154,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
       ),
-    );
+    ).then((value) => audio.dispose());
   }
 
   void changeBarcodeResult(Barcode? newBarcode) {
