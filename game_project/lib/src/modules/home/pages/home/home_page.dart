@@ -85,30 +85,38 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       builder: (context) => AlertDialog(
         elevation: 0,
         backgroundColor: Colors.black.withOpacity(.3),
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'data',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'data',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'data',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'data',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'data',
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
+        content: const MyGlassmorphic(
+          blur: 1,
+          border: 1,
+          borderRadius: 16,
+          height: 450,
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'data',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'data',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'data',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'data',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'data',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );
