@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       builder: (context) => AlertDialog(
         elevation: 0,
         backgroundColor: Colors.black.withOpacity(.3),
-        content: const MyGlassmorphic(
+        content: MyGlassmorphic(
           blur: 1,
           border: 1,
           borderRadius: 35,
@@ -138,17 +138,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'data',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'data',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'data',
-                style: TextStyle(color: Colors.white),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  "Start",
+                  style: TextStyle(fontSize: 20, color: Colors.white70),
+                ),
               ),
             ],
           ),
@@ -209,6 +206,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         Timer(Values.showSnackBarDelay, () {
           if (doesPhotosMatch()) {
             // check if both photos (values) matching
+            final audio = AudioPlayer();
+            audio.play(AssetSource('audio/success_sound.mp3'));
             addToMatches();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -216,6 +215,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 backgroundColor: Colors.green,
               ),
             );
+          } else {
+            final audio = AudioPlayer();
+            audio.play(AssetSource('audio/mistake_sound.mp3'));
           }
         });
 
