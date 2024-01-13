@@ -79,6 +79,41 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     defaultColor.shuffle(random);
   }
 
+  void showPopupDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.black.withOpacity(.3),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'data',
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              'data',
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              'data',
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              'data',
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              'data',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   void changeBarcodeResult(Barcode? newBarcode) {
     // Check if the new barcode result is different from the current one
     if (currentBarcodeResult?.code != newBarcode?.code) {
@@ -290,9 +325,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             actions: [
               IconButton(
                 alignment: Alignment.topLeft,
-                onPressed: restartAndShuffle,
+                onPressed: showPopupDialog,
                 icon: const Icon(
-                  Icons.refresh_rounded,
+                  Icons.menu,
                   size: 35,
                   color: Colors.white,
                 ),
