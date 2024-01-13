@@ -10,6 +10,7 @@ import 'package:game_project/src/modules/home/pages/home/components/my_animated_
 import 'package:game_project/src/modules/home/pages/home/components/my_flipping_cards.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_qr_view.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 import 'components/my_flippedcards_gridview.dart';
 import 'components/my_glassmorphism.dart';
@@ -367,6 +368,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             title: Text(
               widget.title,
               style: const TextStyle(color: Colors.white),
+            ),
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Countdown(
+                seconds: 120,
+                build: (context, time) => Text(
+                  '${(time / 60).floor().toStringAsFixed(0)}:${(time % 60).toStringAsFixed(0)}',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                interval: const Duration(seconds: 1),
+                onFinished: () {
+                  //TODO: show dialog after game for result
+                },
+              ),
             ),
             actions: [
               IconButton(
