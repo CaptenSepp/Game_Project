@@ -52,49 +52,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         content: MyGlassmorphic(
           width: 300,
           height: 300,
-          borderRadius: 45,
+          borderRadius: 35,
           blur: 1,
           border: 1,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Restart the Game"),
-              const Text(
-                "Are you sure you want to restart the Game?",
+              const Padding(
+                padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                child: Column(
+                  children: [
+                    Text(
+                      "Restart the Game",
+                      style: TextStyle(
+                        fontSize: 27,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    Text(
+                      "Are you sure you want to restart the Game?",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white70,
+                      ),
+                    )
+                  ],
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    clearAllBarcodes();
-                    frontSide = [false, false];
-                    matches = [];
-                    _flipXAxis = false;
-                    shuffleMapValues(qrToImageMap);
-                    shuffleColor(defaultColor);
-                    Navigator.of(context).pop();
-                  });
-                },
-                child: const Text("Restart and Shuffle!!!"),
+              Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        clearAllBarcodes();
+                        frontSide = [false, false];
+                        matches = [];
+                        _flipXAxis = false;
+                        shuffleMapValues(qrToImageMap);
+                        shuffleColor(defaultColor);
+                        Navigator.of(context).pop();
+                      });
+                    },
+                    child: const Text("Yes!!! Restart now."),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("No"),
+                  )
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    clearAllBarcodes();
-                    frontSide = [false, false];
-                    matches = [];
-                    _flipXAxis = false;
-                    shuffleMapValues(qrToImageMap);
-                    shuffleColor(defaultColor);
-                    Navigator.of(context).pop();
-                  });
-                },
-                child: const Text("Restart and Shuffle!!!"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("No"),
-              )
             ],
           ),
         ),
@@ -116,21 +124,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         content: const MyGlassmorphic(
           blur: 1,
           border: 1,
-          borderRadius: 16,
-          height: 450,
-          width: double.infinity,
+          borderRadius: 35,
+          height: 300,
+          width: 300,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'data',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'data',
-                style: TextStyle(color: Colors.white),
-              ),
               Text(
                 'data',
                 style: TextStyle(color: Colors.white),
