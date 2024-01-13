@@ -49,7 +49,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       builder: (context) => AlertDialog(
         elevation: 0,
         backgroundColor: Colors.black.withOpacity(.3),
-        // title: const Text("Restart the Game"),
         content: MyGlassmorphic(
           width: 300,
           height: 300,
@@ -58,6 +57,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           border: 1,
           child: Column(
             children: [
+              const Text("Restart the Game"),
               const Text(
                 "Are you sure you want to restart the Game?",
               ),
