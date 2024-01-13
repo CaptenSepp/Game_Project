@@ -304,9 +304,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: defaultColor[0].withOpacity(.5) ////////////////////////////////////////////////////////////////////////////////////////
-              // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
-            ),
+                color:
+                    defaultColor[0].withOpacity(.5) ////////////////////////////////////////////////////////////////////////////////////////
+                // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
+                ),
           ),
         ),
         Scaffold(
@@ -329,7 +330,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 icon: const Icon(
                   Icons.menu,
                   size: 35,
-                  color: Colors.white,
+                  color: Colors.white70,
                 ),
               ),
               IconButton(
@@ -338,7 +339,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 icon: const Icon(
                   Icons.refresh_rounded,
                   size: 35,
-                  color: Colors.white,
+                  color: Colors.white70,
                 ),
               ),
               IconButton(
@@ -347,7 +348,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 icon: const Icon(
                   Icons.refresh_rounded,
                   size: 35,
-                  color: Colors.white,
+                  color: Colors.white70,
                 ),
               ),
             ],
