@@ -15,7 +15,6 @@ class MyLeaderboardListView extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 4.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            // border: Border.all(color: Colors.white, width: 2.0),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,

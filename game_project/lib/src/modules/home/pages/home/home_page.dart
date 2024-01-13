@@ -268,8 +268,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 1, 39, 9),
+            decoration: BoxDecoration(
+              color: defaultColor[0], ////////////////////////////////////////////////////////////////////////////////////////
               // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
             ),
           ),
