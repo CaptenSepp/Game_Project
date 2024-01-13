@@ -48,10 +48,13 @@ final List<String> toShowCards = [
 ];
 
 List<Color> defaultColor = [
-  const Color(0xFFFF0000),
+  Color.fromARGB(255, 255, 170, 0),
+  Color.fromARGB(255, 255, 0, 0),
   const Color(0xFF00FF00),
-  const Color(0xFF0000FF),
+  Color.fromARGB(255, 0, 94, 255),
+  Color.fromARGB(255, 85, 0, 255),
   const Color(0xFFFF00FF),
   const Color(0xFFFFFF00),
+  const Color(0xFF00FFFF),
   const Color(0xFF00FFFF),
 ];
