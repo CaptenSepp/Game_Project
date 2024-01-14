@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     columnCountCalculator();
-    // shuffleMapValues(qrToImageMap);
+    shuffleMapValues(qrToImageMap);
     shuffleColor(defaultColor);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showPopupSetting();
@@ -48,12 +48,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
   }
 
-  void restartAndShuffle() {
+  void showRestartAndShuffle() {
+    final audio = AudioPlayer();
+    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         elevation: 0,
-        backgroundColor: Colors.black.withOpacity(.3),
+        backgroundColor: Colors.black.withOpacity(0),
         content: MyGlassmorphic(
           width: 300,
           height: 300,
@@ -84,6 +86,72 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          clearAllBarcodes();
+                          frontSide = [false, false];
+                          matches = [];
+                          _flipXAxis = false;
+                          shuffleMapValues(qrToImageMap);
+                          shuffleColor(defaultColor);
+                          Navigator.of(context).pop();
+                        });
+                      },
+                      child: const Text("Yes!!! Restart now."),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("No"),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ).then((value) => audio.dispose());
+  }
+
+  void showPopupSetting() {
+    //TODO: use asset pass
+    final audio = AudioPlayer();
+    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.black.withOpacity(0),
+        content: MyGlassmorphic(
+          blur: 1,
+          border: 1,
+          borderRadius: 35,
+          height: 300,
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                child: Column(
+                  children: [
+                    Text(
+                      "Rready to Start?",
+                      style: TextStyle(
+                        fontSize: 27,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Column(
                 children: [
                   ElevatedButton(
@@ -98,13 +166,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         Navigator.of(context).pop();
                       });
                     },
-                    child: const Text("Yes!!! Restart now."),
+                    child: const Text("Start now!!!"),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text("No"),
+                    child: const Text("Join a Team"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Settings"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Exit"),
                   )
                 ],
               ),
@@ -112,47 +192,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
       ),
-    );
+    ).then((value) => audio.dispose());
   }
 
   void shuffleColor(List<Color> defaultColor) {
     final math.Random random = math.Random();
     defaultColor.shuffle(random);
-  }
-
-  void showPopupSetting() {
-    //TODO: use asset pass
-    final audio = AudioPlayer();
-    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        elevation: 0,
-        backgroundColor: Colors.black.withOpacity(.3),
-        content: MyGlassmorphic(
-          blur: 1,
-          border: 1,
-          borderRadius: 35,
-          height: 300,
-          width: 300,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  "Start",
-                  style: TextStyle(fontSize: 20, color: Colors.white70),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ).then((value) => audio.dispose());
   }
 
   void changeBarcodeResult(Barcode? newBarcode) {
@@ -277,7 +322,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void columnCountCalculator() {
     // here get checked how many cards are remaining not flipped
     if (toShowCards.length <= 20 && toShowCards.length > 12) {
-      columnCount = 5; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!------------------------------------
+      columnCount = 5;
     } else if (toShowCards.length <= 12 && toShowCards.length > 6) {
       columnCount = 4;
     } else if (toShowCards.length <= 6 && toShowCards.length > 2) {
@@ -345,15 +390,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Stack(
       children: [
         //?----------------------- background Image -----------------------------
-        Expanded(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: double.infinity,
-            decoration: BoxDecoration(
-                color:
-                    defaultColor[0].withOpacity(.5) ////////////////////////////////////////////////////////////////////////////////////////
-                // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
-                ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: defaultColor[0].withOpacity(.5),
+            // image: DecorationImage(image: AssetImage("assets/bg (10).png"), fit: BoxFit.cover),
           ),
         ),
         Scaffold(
@@ -386,28 +428,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             actions: [
               IconButton(
                 alignment: Alignment.topLeft,
+                onPressed: showRestartAndShuffle,
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                  size: 20,
+                  color: Colors.white70,
+                ),
+              ),
+              IconButton(
+                alignment: Alignment.topLeft,
                 onPressed: showPopupSetting,
                 icon: const Icon(
                   Icons.menu,
-                  size: 35,
-                  color: Colors.white70,
-                ),
-              ),
-              IconButton(
-                alignment: Alignment.topLeft,
-                onPressed: restartAndShuffle,
-                icon: const Icon(
-                  Icons.refresh_rounded,
-                  size: 35,
-                  color: Colors.white70,
-                ),
-              ),
-              IconButton(
-                alignment: Alignment.topLeft,
-                onPressed: restartAndShuffle,
-                icon: const Icon(
-                  Icons.refresh_rounded,
-                  size: 35,
+                  size: 20,
                   color: Colors.white70,
                 ),
               ),
@@ -427,7 +460,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     //?----------------------- Flipped Cards -----------------------------
                     child: MyFlippedcardsGridview(
                       columnCount: columnCount,
-                      gridAspectRatio: gridAspectRatio,
+                      gridAspectRatio: 2.1,
                     ),
                   ),
                   Expanded(
@@ -477,6 +510,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  double get gridAspectRatio => 2; // TODO, Arman, i tried to put this method up with others but i get an error for that
-  // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
+  // double get gridAspectRatio => 2; // TODO, Arman, i tried to put this method up with others but i get an error for that
+  // // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
 }

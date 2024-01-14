@@ -14,7 +14,7 @@ class MyFlippingCardBase extends StatelessWidget {
       height: 150,
       child: ClipRRect(
         // TODO, must be tested what happens if this wieget removes
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(0),
         child: child,
       ),
     );
