@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             addToMatches();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('You found 1 match!!!'),
+                content: Text('You found a match!!!'),
                 backgroundColor: Colors.green,
               ),
             );

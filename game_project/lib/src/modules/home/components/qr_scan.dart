@@ -70,7 +70,7 @@ class _QRViewExampleState extends State<QRViewExample> {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('You found this before!!!'),
+                    content: Text('This card is already matched!!!'),
                     backgroundColor: Colors.red,
                   ),
                 );
