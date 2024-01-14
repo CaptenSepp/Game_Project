@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     timerController = CountdownController(autoStart: false);
     columnCountCalculator();
-    shuffleMapValues(qrToImageMap);
+    // shuffleMapValues(qrToImageMap);
     shuffleColor(defaultColor);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showPopupSetting();
@@ -125,6 +125,69 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+  void showResultPopup() {
+    final audio = AudioPlayer();
+    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.black.withOpacity(0),
+        content: MyGlassmorphic(
+          width: 300,
+          height: 300,
+          borderRadius: 35,
+          blur: 1,
+          border: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  " You managed the game successfully",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  textAlign: TextAlign.center,
+                  "You achived\n ${(matches.length ~/ 2).toInt().toString()} \npoints",
+                  style: TextStyle(
+                    fontSize: 26,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  "Do you want to start again? ",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white70,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      timerController.restart();
+                      clearAllBarcodes();
+                      frontSide = [false, false];
+                      matches = [];
+                      _flipXAxis = false;
+                      shuffleMapValues(qrToImageMap);
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  child: const Text("Start again?"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).then((value) => audio.dispose());
+  }
+
   void showPopupSetting() {
     //TODO: use asset pass
     final audio = AudioPlayer();
@@ -167,7 +230,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         frontSide = [false, false];
                         matches = [];
                         _flipXAxis = false;
-                        shuffleMapValues(qrToImageMap);
+                        // shuffleMapValues(qrToImageMap);
                         // shuffleColor(defaultColor);
                         Navigator.of(context).pop();
                       });
@@ -428,7 +491,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
                 interval: const Duration(seconds: 1),
                 onFinished: () {
-                  //TODO: show dialog after game for result
+                  showResultPopup();
                 },
               ),
             ),
