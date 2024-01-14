@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void showRestartAndShuffle() {
-    final audio = AudioPlayer();
-    audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
+    // final audio = AudioPlayer();
+    // audio.play(AssetSource('audio/backgroud-music-menu.mp3'));
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          timerController.restart();
+                          // timerController.restart();
                           clearAllBarcodes();
                           frontSide = [false, false];
                           matches = [];
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
       ),
-    ).then((value) => audio.dispose());
+    );
   }
 
   void showPopupSetting() {
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         matches = [];
                         _flipXAxis = false;
                         shuffleMapValues(qrToImageMap);
-                        shuffleColor(defaultColor);
+                        // shuffleColor(defaultColor);
                         Navigator.of(context).pop();
                       });
                     },
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('You found a match!!!'),
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.blueGrey,
               ),
             );
           } else {

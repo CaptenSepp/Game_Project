@@ -71,7 +71,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('This card is already matched!!!'),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.blueGrey,
                   ),
                 );
                 canScan = false;
