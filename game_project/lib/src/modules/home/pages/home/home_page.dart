@@ -38,8 +38,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int itemCount = 0;
   int columnCount = 0;
 
+  late CountdownController timerController;
+
   @override
   void initState() {
+    timerController = CountdownController(autoStart: false);
     columnCountCalculator();
     shuffleMapValues(qrToImageMap);
     shuffleColor(defaultColor);
@@ -94,6 +97,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
+                          timerController.restart();
                           clearAllBarcodes();
                           frontSide = [false, false];
                           matches = [];
@@ -158,6 +162,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
+                        timerController.restart();
                         clearAllBarcodes();
                         frontSide = [false, false];
                         matches = [];
@@ -415,7 +420,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Countdown(
-                controller: CountdownController(autoStart: false),
+                controller: timerController,
                 seconds: 120,
                 build: (context, time) => Text(
                   '${(time / 60).floor().toStringAsFixed(0)}:${(time % 60).toStringAsFixed(0)}',
