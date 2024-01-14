@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     columnCountCalculator();
-    // shuffleMapValues(qrToImageMap);
+    shuffleMapValues(qrToImageMap);
     shuffleColor(defaultColor);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       showPopupSetting();
@@ -148,13 +148,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         color: Colors.white70,
                       ),
                     ),
-                    Text(
-                      "........",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white70,
-                      ),
-                    )
                   ],
                 ),
               ),
