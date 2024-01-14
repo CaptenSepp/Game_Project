@@ -413,19 +413,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             actions: [
               IconButton(
                 alignment: Alignment.topLeft,
-                onPressed: showPopupSetting,
+                onPressed: showRestartAndShuffle,
                 icon: const Icon(
-                  Icons.menu,
-                  size: 35,
+                  Icons.refresh_rounded,
+                  size: 20,
                   color: Colors.white70,
                 ),
               ),
               IconButton(
                 alignment: Alignment.topLeft,
-                onPressed: showRestartAndShuffle,
+                onPressed: showPopupSetting,
                 icon: const Icon(
-                  Icons.refresh_rounded,
-                  size: 35,
+                  Icons.menu,
+                  size: 20,
                   color: Colors.white70,
                 ),
               ),
@@ -445,7 +445,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     //?----------------------- Flipped Cards -----------------------------
                     child: MyFlippedcardsGridview(
                       columnCount: columnCount,
-                      gridAspectRatio: gridAspectRatio,
+                      gridAspectRatio: 2.1,
                     ),
                   ),
                   Expanded(
@@ -495,6 +495,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  double get gridAspectRatio => 2; // TODO, Arman, i tried to put this method up with others but i get an error for that
-  // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
+  // double get gridAspectRatio => 2; // TODO, Arman, i tried to put this method up with others but i get an error for that
+  // // TODO, generally i want to get all the information, profesionally from another file like Constant.dart or such
 }
