@@ -1,1 +1,14 @@
-*.dart linguist-language=Dart
+# Count Dart normally
+*.dart linguist-detectable=true
+
+# Exclude native platform folders from language stats
+android/** linguist-vendored
+ios/** linguist-vendored
+macos/** linguist-vendored
+linux/** linguist-vendored
+windows/** linguist-vendored
+
+# Optional: also exclude generated Flutter plugin files
+**/GeneratedPluginRegistrant.* linguist-generated
+**/generated_plugin_registrant.* linguist-generated
+**/generated_plugins.cmake linguist-generated
