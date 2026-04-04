@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:game_project/src/core/models/app_barcode.dart';
 import 'package:game_project/src/modules/home/components/qr_scan.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class MyQRViewOpacity extends StatelessWidget {
-  final void Function(Barcode?) flipCard;
-  final void Function(Barcode?) changeBarcodeResult;
+  final void Function(AppBarcode?) flipCard;
+  final void Function(AppBarcode?) changeBarcodeResult;
   final List<String> matches;
 
   const MyQRViewOpacity({

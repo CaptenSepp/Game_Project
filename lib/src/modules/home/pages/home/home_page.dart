@@ -5,11 +5,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:game_project/src/constants/map.dart';
 import 'package:game_project/src/constants/values.dart';
+import 'package:game_project/src/core/models/app_barcode.dart';
 import 'package:game_project/src/modules/home/components/image_show_widget.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_animated_background.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_flipping_cards.dart';
 import 'package:game_project/src/modules/home/pages/home/components/my_qr_view.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
@@ -27,15 +27,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   // Variables to store barcode result and card flip information
 
-  Barcode? currentBarcodeResult; // stores the barcode
-  Barcode? barcodeResult1; // first card
-  Barcode? barcodeResult2; // second card
+  AppBarcode? currentBarcodeResult; // stores the barcode
+  AppBarcode? barcodeResult1; // first card
+  AppBarcode? barcodeResult2; // second card
 
   List<bool> frontSide = [false, false]; // front side which we see, false means question, true means Photo
   List<String> matches = [];
   bool _flipXAxis = false;
-  // created a method which calculates the number of rows and columns each time
-  int itemCount = 0;
   int columnCount = 0;
 
   late CountdownController timerController;
@@ -269,7 +267,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     defaultColor.shuffle(random);
   }
 
-  void changeBarcodeResult(Barcode? newBarcode) {
+  void changeBarcodeResult(AppBarcode? newBarcode) {
     // Check if the new barcode result is different from the current one
     if (currentBarcodeResult?.code != newBarcode?.code) {
       // if you want to change to not be same barcode as before, then check here, means new must be different than current barcode
@@ -402,19 +400,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
-  Color getBackgroundColorMatches(int index) {
-    if (matches.contains(index.toString())) {
-      return Colors.green;
-    } else {
-      return Colors.orangeAccent;
-    }
-  }
-
   bool doesPhotosMatch() {
     return (qrToImageMap[barcodeResult1?.code] == qrToImageMap[barcodeResult2?.code]);
   }
 
-  void whichCardMustFlip(Barcode? barcode) {
+  void whichCardMustFlip(AppBarcode? barcode) {
     setState(() {
       if (currentBarcodeResult?.code == barcode?.code) {
         // TODO we must flip, if new barcode is not the old barcode.
